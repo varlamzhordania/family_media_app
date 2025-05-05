@@ -1,0 +1,1 @@
+ /media/mhch/NewVolume/project/flutter/familyarbore/.dart_tool/flutter_gen/gen_l10n/app_localizations_en.dart /media/mhch/NewVolume/project/flutter/familyarbore/.dart_tool/flutter_gen/gen_l10n/app_localizations.dart:  /media/mhch/NewVolume/project/flutter/familyarbore/l10n.yaml /media/mhch/NewVolume/project/flutter/familyarbore/lib/l10n/app_en.arb

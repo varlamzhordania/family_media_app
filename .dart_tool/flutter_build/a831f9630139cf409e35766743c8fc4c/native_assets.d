@@ -1,0 +1,1 @@
+ /media/mhch/NewVolume/project/flutter/familyarbore/.dart_tool/flutter_build/a831f9630139cf409e35766743c8fc4c/native_assets.yaml: 

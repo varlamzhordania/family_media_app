@@ -1,0 +1,36 @@
+{
+  "@@locale": "en",
+  "title": "Family Arbore",
+  "greeting": "Welcome to Family Arbore",
+  "dec": "A platform built for families to connect, share, and grow together. Share posts, likes, and comments, message each other, set up family events, and even create your family tree heritage. Join us and keep your family legacy alive.",
+  "signUp": "Create your account and start sharing moments.",
+  "signUpTitle": "Sign Up",
+  "signIn": "Sign in",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "email": "Email",
+  "phone": "Phone",
+  "password": "Password",
+  "confirmPassword": "ConfirmPassword",
+  "alreadyHaveAccount": "Already have an account ? Sign in here.",
+  "edit": "Edit",
+  "profile": "Profile",
+  "messages": "Messages",
+  "home": "Home",
+  "logout": "Logout",
+  "logoutSure": "Are you sure?",
+  "no": "no",
+  "yes": "yes",
+  "chooseFromGallery": "Choose From Gallery",
+  "takeAPhoto": "Take A Photo",
+  "editProfile": "Edit Profile",
+  "familyList": "Family",
+  "signInDec": "Sign in to your account to continue.",
+  "forgetYourPassword": "forget your password ?",
+  "forgetPasswordScreenTitle": "Forget Password",
+  "pleaseEnterYouEmail": "Please enter your email.",
+  "sendEmail": "SendEmail"
+
+
+
+}
