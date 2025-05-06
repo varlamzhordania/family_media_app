@@ -32,7 +32,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
   @override
   void initState() {
-    // authProvider = Provider.of<AuthProvider>(context, listen: false);
     emailEditingController = TextEditingController();
     super.initState();
   }
@@ -47,11 +46,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
 
   Future<void> _showMyDialog() async {
-
-    debugPrint("test ${authProvider.forgotMessage.toString()}");
-    debugPrint("test2 ${authProvider.is_success.toString()}");
-
-
     return showDialog<void>(
         context: context,
         barrierDismissible: true, // user must tap button!

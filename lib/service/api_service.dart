@@ -17,7 +17,7 @@ class ApiService {
   }
   
   
-  Future<Map<String, dynamic>> registerUser(Map<String, dynamic> requestBody) async{
+  Future<String> registerUser(Map<String, dynamic> requestBody) async{
     final response = await http.post(
       Uri.parse('$baseUrl/api/accounts/user/register/'),
       headers: <String, String> {
@@ -28,10 +28,17 @@ class ApiService {
     );
 
 
-    if(response.statusCode == 200){
+
+    debugPrint(response.body);
+
+    if(response.statusCode == 201){
+      return "Successful, Verify Email Send To You";
+
+    }else if(response.statusCode == 400){
+      return "user with this email address already exists.";
+
+    } else{
       return jsonDecode(response.body);
-    }else{
-      throw "Error to register User";
     }
   }
 
@@ -52,11 +59,14 @@ class ApiService {
       debugPrint(response.body);
 
 
-      if(response.statusCode == 200){
-        return jsonDecode(response.body);
-      }else{
-        throw "Error to register User";
-      }
+
+      return jsonDecode(response.body);
+
+      // if(response.statusCode == 200){
+      //
+      // }else{
+      //   return jsonDecode("Invalid email or password!");
+      // }
     }catch(e){
       throw Exception(e);
     }

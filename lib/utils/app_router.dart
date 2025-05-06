@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:familyarbore/provider/auth_provider.dart';
+import 'package:familyarbore/screens/auth/register/register_password_screen.dart';
 import 'package:familyarbore/screens/get_start/get_start_screen.dart';
+import 'package:familyarbore/screens/home/home_screen.dart';
 import 'package:familyarbore/screens/home_wrap/home_wrap_screen.dart';
 import 'package:familyarbore/screens/splash/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -34,14 +36,6 @@ class AppRouter {
         name: GetStartScreen.routeName,
         builder: (context, state) {
           return const GetStartScreen();
-        },
-      ),
-
-      GoRoute(
-        path: HomeWrapScreen.routeName,
-        name: HomeWrapScreen.routeName,
-        builder: (context, state) {
-          return const HomeWrapScreen();
         },
       ),
 
@@ -94,8 +88,33 @@ class AppRouter {
           ),
 
 
+
+
+
+          GoRoute(
+            path: RegisterPasswordScreen.routeName,
+            name: RegisterPasswordScreen.routeName,
+            builder: (context, state) {
+              return RegisterPasswordScreen(requestBody: state.extra as Map<String, dynamic>);
+
+            },
+          ),
+
+
         ]
       ),
+
+
+
+
+      GoRoute(
+        path: HomeWrapScreen.routeName,
+        name: HomeWrapScreen.routeName,
+        builder: (context, state) {
+          return const HomeWrapScreen();
+        },
+      ),
+
 
 
     ],
@@ -105,6 +124,8 @@ class AppRouter {
 
       final appProvider = GetIt.instance<AuthProvider>();
 
+
+      debugPrint('Redirect check - isAuthenticated: ${appProvider.isAuthenticated}, location: ${state.matchedLocation}');
 
       if(appProvider.isChecking){
         return null;
@@ -118,11 +139,12 @@ class AppRouter {
 
 
       final isGoingToLogin = state.matchedLocation == LoginScreen.routeName;
-      final isGoingToHome = state.matchedLocation == HomeWrapScreen.routeName;
+      final isGoingToHome = state.matchedLocation == "${HomeWrapScreen.routeName}";;
       final isGoingToGetStart = state.matchedLocation == GetStartScreen.routeName;
 
       final isGoingToForgotPassword = state.matchedLocation == "${LoginScreen.routeName}${ForgotPassword.routeName}";
       final isGoingToRegister = state.matchedLocation == "${LoginScreen.routeName}${RegisterScreen.routeName}";
+      final isGoingToRegisterPassword = state.matchedLocation == "${LoginScreen.routeName}${RegisterPasswordScreen.routeName}";
 
       if(isGoingToForgotPassword){
         debugPrint(ForgotPassword.routeName);
@@ -136,10 +158,15 @@ class AppRouter {
       }
 
 
-      if(isAuthenticated && !isGoingToHome){
-        debugPrint(HomeWrapScreen.routeName);
+      if(isGoingToRegisterPassword){
+        debugPrint(RegisterPasswordScreen.routeName);
+        return null;
+      }
 
-        return HomeWrapScreen.routeName;
+
+      if(isAuthenticated && !isGoingToHome) {
+
+        return "${HomeWrapScreen.routeName}";
       }
 
 

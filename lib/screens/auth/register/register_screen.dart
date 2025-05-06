@@ -1,15 +1,22 @@
 
 import 'package:familyarbore/generated/assets.dart';
+import 'package:familyarbore/provider/auth_provider.dart';
 import 'package:familyarbore/screens/auth/login/login_screen.dart';
+import 'package:familyarbore/screens/auth/register/register_password_screen.dart';
 import 'package:familyarbore/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   static String routeName = "/RegisterScreen";
+
   const RegisterScreen({super.key});
 
   @override
@@ -18,30 +25,29 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
 
+  final authProvider = GetIt.instance<AuthProvider>();
+
+
+
 
   bool _focusFirstName = false;
 
   bool _focusLastName = false;
   bool _focusEmail = false;
-  bool _focusPassword = false;
-  bool _focusConfirmPassword = false;
+
 
   late TextEditingController firstNameEditingController;
   late TextEditingController lastNameEditingController;
   late TextEditingController emailEditingController;
-  late TextEditingController passwordEditingController;
-  late TextEditingController confirmPasswordEditingController;
 
-  bool showPassword = false;
-  bool showPasswordConfirm = false;
 
   @override
   void initState() {
+
     firstNameEditingController = TextEditingController();
     lastNameEditingController = TextEditingController();
     emailEditingController = TextEditingController();
-    passwordEditingController = TextEditingController();
-    confirmPasswordEditingController = TextEditingController();
+
     super.initState();
   }
 
@@ -49,13 +55,98 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   void dispose() {
+
     firstNameEditingController.dispose();
     lastNameEditingController.dispose();
     emailEditingController.dispose();
-    passwordEditingController.dispose();
-    confirmPasswordEditingController.dispose();
 
     super.dispose();
+  }
+
+
+
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: true, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: backgroundColor,
+            content: SizedBox(
+              width: 200,
+              height: 120,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(56),
+                          color: authProvider.is_success ? successColor.withOpacity(0.6)  : errorColor.withOpacity(0.6)
+                      ),
+                      child:  Center(
+                          child: authProvider.is_success ?
+                          Icon(
+                            Icons.check_circle, size: 30, color: successColor,)
+                              :
+                          Icon(
+                            Icons.error, size: 30, color: errorColor,)
+                      ),
+                    ),
+
+                    Text(
+                        authProvider.forgotMessage, // Text displayed on the button
+                        style: GoogleFonts.rubik().copyWith(fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: textColorBody)),
+
+                    SizedBox(
+                      height: 15,
+                    ),
+
+
+                    Center(
+                      child: GestureDetector(
+                        onTap: ()=> context.push(LoginScreen.routeName),
+
+                        child: Container(
+                            width: 200,
+                            height: 45,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(
+                                  color: borderColor,
+                                  width: 2,
+                                )
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+
+                                Text(
+                                    "OK", // Text displayed on the button
+                                    style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: btnColor)),
+
+                              ],
+                            )
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+              ),
+            ),
+
+          );
+        });
   }
 
 
@@ -67,17 +158,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
 
-
-
-
-
-
-
     return  SafeArea(
       child: Scaffold(
         backgroundColor: lightBluColor2,
         body: SingleChildScrollView(
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
 
           child: Stack(
             children: [
@@ -144,8 +229,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 GestureDetector(
                                   onTap: () =>{
                                     setState(() {
-                                      _focusConfirmPassword = false;
-                                      _focusPassword = false;
                                       _focusLastName = false;
                                       _focusEmail = false;
 
@@ -324,208 +407,82 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 
 
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
 
 
-                                            SizedBox(
-                                              height: _height * 0.06,
-                                              child: Focus(
-                                                onFocusChange: (value) {
-                                                  setState(() {
-                                                    _focusPassword = value;
-                                                  });
-                                                },
-                                                child: TextField(
-                                                  keyboardType: TextInputType.text,
-                                                  controller: passwordEditingController,
-                                                  obscureText: showPassword ? false : true,
-                                                  style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: textColorBody),
-                                                  decoration: InputDecoration(
-
-                                                      prefixIcon:
-                                                      SvgPicture.asset(
-                                                        width: 5,
-                                                        height: 5,
-                                                        fit: BoxFit.scaleDown,
-                                                        Assets.iconsLock,
-                                                        semanticsLabel: 'password icon',
-                                                        color: _focusPassword ? borderColor : hintColor,
-
-                                                      ),
-
-                                                      suffixIcon: GestureDetector(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            showPassword = !showPassword;
-                                                          });
-                                                        },
-                                                        child: showPassword ? SvgPicture.asset(
-                                                          width: 5,
-                                                          height: 5,
-                                                          fit: BoxFit.scaleDown,
-                                                          Assets.iconsEye,
-                                                          semanticsLabel: 'password icon',
-                                                          color: _focusPassword ? hintColor : hintColor,
-
-                                                        ) :
-                                                        SvgPicture.asset(
-                                                          width: 5,
-                                                          height: 5,
-                                                          fit: BoxFit.scaleDown,
-                                                          Assets.iconsEyeSlash,
-                                                          semanticsLabel: 'password icon',
-                                                          color: _focusPassword ? hintColor : hintColor,
-
-                                                        ),
-                                                      ),
-                                                      enabledBorder: const OutlineInputBorder(
-                                                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                                                        borderSide: BorderSide(color: hintColor),
-                                                      ),
-                                                      focusedBorder: const OutlineInputBorder(
-                                                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                                                        borderSide: BorderSide(color: borderColor),
-                                                      ),
-                                                      hintText: AppLocalizations.of(context)!.password,
-                                                      hintStyle: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: hintColor),
-                                                      contentPadding: const EdgeInsets.symmetric(
-                                                          vertical: 12.0, horizontal: 16.0),
-                                                      border: InputBorder.none),
-                                                ),
-                                              ),
-                                            ),
-
-
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-
-
-                                            SizedBox(
-                                              height: _height * 0.06,
-                                              child: Focus(
-                                                onFocusChange: (value) {
-                                                  setState(() {
-                                                    _focusConfirmPassword = value;
-                                                  });
-                                                },
-                                                child: TextField(
-                                                  keyboardType: TextInputType.text,
-                                                  controller: confirmPasswordEditingController,
-                                                  obscureText: showPasswordConfirm ? false : true,
-                                                  style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: textColorBody),
-                                                  decoration: InputDecoration(
-
-                                                      prefixIcon:
-                                                      SvgPicture.asset(
-                                                        width: 5,
-                                                        height: 5,
-                                                        fit: BoxFit.scaleDown,
-                                                        Assets.iconsLock,
-                                                        semanticsLabel: 'password icon',
-                                                        color: _focusConfirmPassword ? borderColor : hintColor,
-
-                                                      ),
-
-                                                      suffixIcon: GestureDetector(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            showPasswordConfirm = !showPasswordConfirm;
-                                                          });
-                                                        },
-                                                        child: showPasswordConfirm ? SvgPicture.asset(
-                                                          width: 5,
-                                                          height: 5,
-                                                          fit: BoxFit.scaleDown,
-                                                          Assets.iconsEye,
-                                                          semanticsLabel: 'password icon',
-                                                          color: _focusConfirmPassword ? hintColor : hintColor,
-
-                                                        ) :
-                                                        SvgPicture.asset(
-                                                          width: 5,
-                                                          height: 5,
-                                                          fit: BoxFit.scaleDown,
-                                                          Assets.iconsEyeSlash,
-                                                          semanticsLabel: 'password icon',
-                                                          color: _focusConfirmPassword ? hintColor : hintColor,
-
-                                                        ),
-                                                      ),
-                                                      enabledBorder: const OutlineInputBorder(
-                                                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                                                        borderSide: BorderSide(color: hintColor),
-                                                      ),
-                                                      focusedBorder: const OutlineInputBorder(
-                                                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                                                        borderSide: BorderSide(color: borderColor),
-                                                      ),
-                                                      hintText: AppLocalizations.of(context)!.confirmPassword,
-                                                      hintStyle: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: hintColor),
-                                                      contentPadding: const EdgeInsets.symmetric(
-                                                          vertical: 12.0, horizontal: 16.0),
-                                                      border: InputBorder.none),
-                                                ),
-                                              ),
-                                            ),
 
                                             const SizedBox(
                                               height: 20,
                                             ),
 
                                             Center(
-                                              child: Container(
-                                                width: _width * 0.6,
-                                                height: _height * 0.067,
-                                                decoration: BoxDecoration(
-                                                  gradient: cardColorBlue,
-                                                  borderRadius: BorderRadius.circular(15)
+                                              child: InkWell(
+                                                onTap: (){
+
+                                                  var _data = {"email": emailEditingController.text.toString(),
+                                                    "first_name": firstNameEditingController.text.toString(),
+                                                    "last_name": lastNameEditingController.text.toString(),
+                                                  };
+
+
+                                                  if(emailEditingController.text.toString().isNotEmpty && emailEditingController.text.toString().isNotEmpty && lastNameEditingController.text.toString().isNotEmpty){
+                                                    if(emailEditingController.text.toString().contains("@")){
+                                                      context.push("${LoginScreen.routeName}${RegisterPasswordScreen.routeName}", extra: _data);
+                                                    }else{
+                                                      Fluttertoast.showToast(msg: "Please Enter A Valid Email");
+                                                    }
+                                                  }else{
+                                                    Fluttertoast.showToast(msg: "PLease Enter All Fields");
+                                                  }
+
+
+                                                },
+                                                child: Container(
+                                                    width: _width * 0.6,
+                                                    height: _height * 0.067,
+                                                    decoration: BoxDecoration(
+                                                        gradient: cardColorBlue,
+                                                        borderRadius: BorderRadius.circular(15)
+                                                    ),
+                                                    child: Consumer<AuthProvider>(builder: (context, data, child) {
+
+                                                      return data.is_loading ?
+                                                      Center(child: LoadingAnimationWidget.progressiveDots(
+                                                          color: Colors.white,
+                                                          size: 25
+                                                      ))
+                                                          : Row(
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        children: [
+
+                                                          Text(
+                                                              AppLocalizations.of(context)!.continue_text, // Text displayed on the button
+                                                              style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white)),
+                                                          SizedBox(
+                                                            width: _width * 0.02,
+                                                          ),
+
+
+                                                          SvgPicture.asset(
+                                                            width: 15,
+                                                            height: 15,
+                                                            fit: BoxFit.scaleDown,
+                                                            Assets.iconsArrowRight,
+                                                            semanticsLabel: 'login icon',
+                                                            color: Colors.white,
+
+                                                          ),
+
+                                                        ],
+                                                      );
+
+                                                    })
                                                 ),
-                                                child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                                    children: [
-
-                                                      Text(
-                                                          AppLocalizations.of(context)!.signUpTitle, // Text displayed on the button
-                                                          style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white)),
-                                                      SizedBox(
-                                                        width: _width * 0.02,
-                                                      ),
-
-
-                                                      SvgPicture.asset(
-                                                        width: 15,
-                                                        height: 15,
-                                                        fit: BoxFit.scaleDown,
-                                                        Assets.iconsArrowRight,
-                                                        semanticsLabel: 'login icon',
-                                                        color: Colors.white,
-
-                                                      ),
-
-                                                    ],
-                                                  )
-                                                  ),
-                                                ),
-
-                                            SizedBox(
+                                              ),
+                                            ),
+                                            const SizedBox(
                                               height: 10,
                                             ),
-
-
-                                            // Center(
-                                            //   child: Text(
-                                            //     "Or",
-                                            //     style: GoogleFonts.rubik().copyWith(fontSize: 17, fontWeight: FontWeight.w600, color: hintColor),
-                                            //   ),
-                                            // ),
-
-                                            // SizedBox(
-                                            //   height: 2,
-                                            // ),
 
 
 

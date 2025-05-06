@@ -272,6 +272,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'SendEmail'**
   String get sendEmail;
+
+  /// No description provided for @continue_text.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continue_text;
+
+  /// No description provided for @please_enter_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Your Password'**
+  String get please_enter_password;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'ok'**
+  String get ok;
+
+  /// No description provided for @pleaseEnterAllFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter all fields'**
+  String get pleaseEnterAllFields;
+
+  /// No description provided for @emailisnotvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is not valid'**
+  String get emailisnotvalid;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

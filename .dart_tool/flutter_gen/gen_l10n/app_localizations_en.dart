@@ -95,4 +95,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sendEmail => 'SendEmail';
+
+  @override
+  String get continue_text => 'Continue';
+
+  @override
+  String get please_enter_password => 'Please Enter Your Password';
+
+  @override
+  String get ok => 'ok';
+
+  @override
+  String get pleaseEnterAllFields => 'Please enter all fields';
+
+  @override
+  String get emailisnotvalid => 'Email is not valid';
 }

@@ -28,9 +28,8 @@ class AuthProvider with ChangeNotifier {
   bool get hasSeenGetStarted => _hasSeenGetStarted;
   bool get isChecking => _isChecking;
   bool get is_loading => _is_loading;
-  String get forgotMessage => _forgotMessage;
-
   bool get is_success => _is_success;
+  String get forgotMessage => _forgotMessage;
 
 
 
@@ -43,38 +42,77 @@ class AuthProvider with ChangeNotifier {
     await preferences.setBool(LOG_IN, true);
 
 
+    notifyListeners();
+
+
   }
 
   Future<void> registerUserReq(Map<String, dynamic> requestBody) async{
 
+
+
     try {
+      _is_loading = true;
+      notifyListeners();
+
       final response = await ApiService().registerUser(requestBody);
 
-      if(response.isNotEmpty){
 
-      }
+      _forgotMessage = response;
+      _is_success = response.toString().contains("Successful");
+
+      await Future.delayed(Duration(seconds: 5));
+
+      notifyListeners();
+
+
     }catch (e) {
-      throw e;
+      Fluttertoast.showToast(msg: e.toString());
+    }finally{
+      _is_loading = false;
+      notifyListeners();
     }
+
 
   }
 
 
-  Future<String> loginUserReq(Map<String, dynamic> requestBody) async{
+  Future<void> loginUserReq(Map<String, dynamic> requestBody) async{
 
     try {
       _is_loading = true;
+      notifyListeners();
+
 
       final response = await ApiService().loginUser(requestBody);
       LoginModel loginModel = LoginModel.fromJson(response);
 
 
-      setUserToken(loginModel.accessToken.toString(),
-          loginModel.refreshToken.toString(),
-          loginModel.expiresIn.toString()
-      );
-      notifyListeners();
-      return "User successfully Login";
+
+
+
+
+
+      if(response.containsKey("error")){
+        _isAuthenticated = false;
+        _hasSeenGetStarted = false;
+        notifyListeners();
+
+        Fluttertoast.showToast(msg: response["error_description"]);
+
+      }else{
+        _isAuthenticated = true;
+        _hasSeenGetStarted = true;
+
+        await setUserToken(loginModel.accessToken.toString(),
+            loginModel.refreshToken.toString(),
+            loginModel.expiresIn.toString()
+        );
+
+        notifyListeners();
+        Fluttertoast.showToast(msg: "User successfully Login");
+      }
+
 
 
 
@@ -94,6 +132,8 @@ class AuthProvider with ChangeNotifier {
 
     try {
       _is_loading = true;
+      notifyListeners();
+
 
       final response = await ApiService().forgetPasswordUser(requestBody);
 

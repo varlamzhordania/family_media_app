@@ -15,6 +15,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/assets.dart';
+import '../../home_wrap/home_wrap_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static String routeName = "/LoginScreen";
@@ -30,7 +31,7 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _focusEmail = false;
   bool _focusPassword = false;
 
-  final  authProvider = GetIt.instance<AuthProvider>();
+  late   AuthProvider authProvider;
 
   late TextEditingController emailEditingController;
   late TextEditingController passwordEditingController;
@@ -40,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
+    authProvider = Provider.of<AuthProvider>(context, listen: false);
     emailEditingController = TextEditingController();
     passwordEditingController = TextEditingController();
     super.initState();
@@ -57,29 +59,57 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
   void loginReq() async {
-    try{
-      if(emailEditingController.text.isNotEmpty && passwordEditingController.text.isNotEmpty){
-        authProvider.loginUserReq({
-          "client_id": CLIENT_ID,
-          "client_secret": CLIENT_SECRET,
-          "grant_type": "password",
-          "password": passwordEditingController.text.toString(),
-          "username": emailEditingController.text.toString()
-        });
+
+    if(emailEditingController.text.isNotEmpty && passwordEditingController.text.isNotEmpty){
+
+
+      if(emailEditingController.text.toString().contains("@")){
+        try{
+
+          await authProvider.loginUserReq({
+            "client_id": CLIENT_ID,
+            "client_secret": CLIENT_SECRET,
+            "grant_type": "password",
+            "password": passwordEditingController.text.toString(),
+            "username": emailEditingController.text.toString()
+          }).then((onValue){
+            debugPrint("heloo: ${authProvider.isAuthenticated}");
+              if(context.mounted){
+                context.go(HomeWrapScreen.routeName);
+              }
+
+          });
+
+          // if(authProvider.isAuthenticated){
+          //   context.go("${LoginScreen.routeName}${HomeWrapScreen.routeName}");
+          // }
+
+        }finally{
+          // passwordEditingController.clear();
+          // emailEditingController.clear();
+
+
+        }
       }else{
-        Fluttertoast.showToast(msg: "Please Enter All Fields");
+        Fluttertoast.showToast(msg: "Email is not valid");
 
       }
 
+    }else{
+      Fluttertoast.showToast(msg: "Please enter all fields");
 
-    }finally{
-      passwordEditingController.clear();
-      emailEditingController.clear();
     }
 
 
 
+
+
   }
+
+
+
+
+
 
 
 
@@ -192,7 +222,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                           borderRadius: BorderRadius.circular(15)
                                                       ),
                                                       child: Consumer<AuthProvider>(builder: (context, data, child) {
-
+                                                        debugPrint("loading: ${data
+                                                            .is_loading}");
                                                         return data.is_loading ?
                                                             Center(child: LoadingAnimationWidget.progressiveDots(
                                                               color: Colors.white,
@@ -396,6 +427,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
 }
+
+
 
 class btn_register extends StatelessWidget {
   const btn_register({

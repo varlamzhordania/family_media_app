@@ -29,7 +29,13 @@
   "forgetYourPassword": "forget your password ?",
   "forgetPasswordScreenTitle": "Forget Password",
   "pleaseEnterYouEmail": "Please enter your email.",
-  "sendEmail": "SendEmail"
+  "sendEmail": "SendEmail",
+  "continue_text": "Continue",
+  "please_enter_password": "Please Enter Your Password",
+  "ok": "ok",
+  "pleaseEnterAllFields": "Please enter all fields",
+  "emailisnotvalid": "Email is not valid"
+
 
 
 
