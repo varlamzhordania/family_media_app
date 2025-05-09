@@ -6,6 +6,8 @@ import 'package:familyarbore/service/sharedPreferences_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+import '../screens/home_wrap/home_wrap_screen.dart';
 import '../utils/Constant.dart';
 
 class AuthProvider with ChangeNotifier {
@@ -47,6 +49,20 @@ class AuthProvider with ChangeNotifier {
 
   }
 
+
+
+
+  Future<void> setUserDetails(Map<String, dynamic> detail) async {
+
+    debugPrint("user:  " + detail['user']);
+    debugPrint("members:  " + detail['MEMBERSHIP'][0]);
+
+    await preferences.setObject("USER", detail['user']);
+    await preferences.setObject("MEMBERSHIP", detail['memberships'][0]);
+    notifyListeners();
+  }
+
+
   Future<void> registerUserReq(Map<String, dynamic> requestBody) async{
 
 
@@ -77,55 +93,74 @@ class AuthProvider with ChangeNotifier {
   }
 
 
-  Future<void> loginUserReq(Map<String, dynamic> requestBody) async{
+  Future<void> getUserDetail() async{
+
+
 
     try {
       _is_loading = true;
       notifyListeners();
 
+      final response = await ApiService().getUserDetails();
+      await setUserDetails(response);
 
-      final response = await ApiService().loginUser(requestBody);
-      LoginModel loginModel = LoginModel.fromJson(response);
-
-
-
-
-
-
-
-      if(response.containsKey("error")){
-        _isAuthenticated = false;
-        _hasSeenGetStarted = false;
-        notifyListeners();
-
-        Fluttertoast.showToast(msg: response["error_description"]);
-
-      }else{
-        _isAuthenticated = true;
-        _hasSeenGetStarted = true;
-
-        await setUserToken(loginModel.accessToken.toString(),
-            loginModel.refreshToken.toString(),
-            loginModel.expiresIn.toString()
-        );
-
-        notifyListeners();
-        Fluttertoast.showToast(msg: "User successfully Login");
-      }
-
-
-
+      notifyListeners();
 
 
     }catch (e) {
       Fluttertoast.showToast(msg: e.toString());
-      throw(e);
     }finally{
       _is_loading = false;
       notifyListeners();
     }
 
+
   }
+
+
+  Future<void> loginUserReq(Map<String, dynamic> requestBody) async {
+    try {
+      _is_loading = true;
+      notifyListeners();
+
+      final response = await ApiService().loginUser(requestBody);
+      LoginModel loginModel = LoginModel.fromJson(response);
+
+      if (response.containsKey("error")) {
+        _isAuthenticated = false;
+        _hasSeenGetStarted = false;
+        notifyListeners();
+
+        Fluttertoast.showToast(msg: response["error_description"]);
+      } else {
+        // First set the tokens
+        await setUserToken(
+            loginModel.accessToken.toString(),
+            loginModel.refreshToken.toString(),
+            loginModel.expiresIn.toString()
+        );
+
+        await Future.delayed(Duration(seconds: 1));
+
+        _isAuthenticated = true;
+        _hasSeenGetStarted = true;
+        await Future.delayed(Duration(seconds: 1));
+
+        notifyListeners();
+
+
+        Fluttertoast.showToast(msg: "User successfully Login");
+      }
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+      throw(e);
+    } finally {
+      _is_loading = false;
+      notifyListeners();
+    }
+  }
+
+
 
   Future<void> forgotPasswordReq(Map<String, dynamic> requestBody) async{
     String test = "Password reset link sent to your email";

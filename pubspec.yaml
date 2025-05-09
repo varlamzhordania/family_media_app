@@ -53,6 +53,11 @@ dependencies:
   get_it: ^8.0.3
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  carousel_slider: ^5.0.0
+  infinite_scroll_pagination: ^5.0.0
+  timeago: ^3.7.0
+  dots_indicator: ^4.0.1
+  choice: ^2.3.2
 
 
   # The following adds the Cupertino Icons font to your application.

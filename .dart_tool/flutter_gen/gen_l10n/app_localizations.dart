@@ -228,13 +228,13 @@ abstract class AppLocalizations {
   /// No description provided for @takeAPhoto.
   ///
   /// In en, this message translates to:
-  /// **'Take A Photo'**
+  /// **'Camera'**
   String get takeAPhoto;
 
   /// No description provided for @editProfile.
   ///
   /// In en, this message translates to:
-  /// **'Edit Profile'**
+  /// **'Photo Gallery'**
   String get editProfile;
 
   /// No description provided for @familyList.
@@ -302,6 +302,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Email is not valid'**
   String get emailisnotvalid;
+
+  /// No description provided for @telUsPost.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell us about the post you want to create'**
+  String get telUsPost;
+
+  /// No description provided for @family.
+  ///
+  /// In en, this message translates to:
+  /// **'Family'**
+  String get family;
+
+  /// No description provided for @addPostTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New Post'**
+  String get addPostTitle;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @post.
+  ///
+  /// In en, this message translates to:
+  /// **'POST'**
+  String get post;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

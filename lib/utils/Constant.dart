@@ -1,4 +1,5 @@
 
+const baseUrl = 'https://api.familyarbore.com';
 
 
 
@@ -17,4 +18,7 @@ const LOG_IN = "login";
 const FIRST_TIME = "firstTime";
 
 
-const baseUrl = 'https://api.familyarbore.com';
+
+
+const USER	 = "user";
+const MEMBERSHIP	= "memberships";

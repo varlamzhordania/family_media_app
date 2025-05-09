@@ -7,7 +7,7 @@ import 'package:familyarbore/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -74,19 +74,16 @@ class _LoginScreenState extends State<LoginScreen> {
             "username": emailEditingController.text.toString()
           }).then((onValue){
             debugPrint("heloo: ${authProvider.isAuthenticated}");
-              if(context.mounted){
-                context.go(HomeWrapScreen.routeName);
-              }
+              // if(context.mounted){
+              //   context.go(HomeWrapScreen.routeName);
+              // }
 
           });
 
-          // if(authProvider.isAuthenticated){
-          //   context.go("${LoginScreen.routeName}${HomeWrapScreen.routeName}");
-          // }
 
         }finally{
-          // passwordEditingController.clear();
-          // emailEditingController.clear();
+          passwordEditingController.clear();
+          emailEditingController.clear();
 
 
         }

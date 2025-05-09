@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../utils/Constant.dart';
@@ -71,6 +73,177 @@ class ApiService {
       throw Exception(e);
     }
   }
+
+
+
+
+
+  Future<Map<String, dynamic>> getHomePosts(int pageKey) async{
+    final userToken =  await _getUserToken();
+
+    try{
+      final response = await http.get(
+          Uri.parse('$baseUrl/api/posts/?page=$pageKey'),
+          headers: <String, String> {
+            'Content-Type': 'application/json; charset=UTF-8',
+            "Authorization": "Bearer " + userToken.toString()
+          },
+
+
+      );
+      return jsonDecode(response.body);
+
+    }catch(e){
+      throw Exception(e);
+    }
+  }
+
+
+  Future<Map<String, dynamic>> getUserDetails() async{
+    final userToken =  await _getUserToken();
+
+    try{
+      final response = await http.get(
+        Uri.parse('$baseUrl/api/accounts/user'),
+        headers: <String, String> {
+          'Content-Type': 'application/json; charset=UTF-8',
+          "Authorization": "Bearer " + userToken.toString()
+        },
+
+
+      );
+      return jsonDecode(response.body);
+
+    }catch(e){
+      throw Exception(e);
+    }
+  }
+
+
+
+
+  Future<Map<String, dynamic>> likePost(Map<String, dynamic> requestsBody) async{
+    final userToken =  await _getUserToken();
+
+
+    try{
+      final response = await http.post(
+        Uri.parse('$baseUrl/api/posts/like/'),
+        headers: <String, String> {
+          'Content-Type': 'application/json; charset=UTF-8',
+          "Authorization": "Bearer " + userToken.toString()
+        },
+
+
+        body: jsonEncode(requestsBody)
+
+
+
+      );
+
+      debugPrint(response.body);
+
+      return jsonDecode(response.body);
+
+    }catch(e){
+      throw Exception(e);
+    }
+  }
+
+
+  Future<void> addPost(String familyId, String dec, List<String>? images) async{
+    final userToken = await _getUserToken();
+    
+    var requests = http.MultipartRequest('POST', Uri.parse('${baseUrl}/api/posts/'));
+
+    requests.fields['text'] = dec;
+    requests.fields['family'] = familyId;
+
+    requests.headers.addAll({
+      "Authorization": "Bearer $userToken"
+    });
+
+    if (images != null || images!.isNotEmpty){
+      images.forEach((action) async{
+        var file = await http.MultipartFile.fromPath(
+            'media',
+            action
+        );
+        requests.files.add(file);
+      });
+
+
+    }
+
+    try{
+      var response = await requests.send();
+      debugPrint("status code new post: " + response.statusCode.toString());
+      if(response.statusCode == 201){
+        return;
+      }else{
+        throw Exception('Failed to create new post');
+      }
+    }catch(e){
+      throw Exception('$e');
+
+    }
+
+    
+    
+    
+    
+    
+  }
+
+
+  Future<Map<String, dynamic>> getComments(int pageKey, int postId) async{
+    final userToken =  await _getUserToken();
+
+
+    try{
+      final response = await http.get(
+          Uri.parse('$baseUrl/api/posts/comments/?post=$postId&?page=$pageKey'),
+          headers: <String, String> {
+            'Content-Type': 'application/json; charset=UTF-8',
+            "Authorization": "Bearer " + userToken.toString()
+          },
+      );
+
+      debugPrint(response.body);
+
+
+      return jsonDecode(response.body);
+
+
+
+    }catch(e){
+      throw Exception(e);
+    }
+  }
+
+
+  Future<void> addComments(Map<String, dynamic> requestsBody) async{
+    final userToken = await _getUserToken();
+
+    try{
+      await http.post(
+          Uri.parse('$baseUrl/api/posts/comments/'),
+          headers: <String, String> {
+            'Content-Type': 'application/json; charset=UTF-8',
+            "Authorization": "Bearer " + userToken.toString()
+          },
+
+
+          body: jsonEncode(requestsBody)
+
+
+      );
+
+    }catch(e){
+      throw Exception(e);
+    }
+  }
+
 
 
 

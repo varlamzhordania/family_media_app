@@ -73,10 +73,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chooseFromGallery => 'Choose From Gallery';
 
   @override
-  String get takeAPhoto => 'Take A Photo';
+  String get takeAPhoto => 'Camera';
 
   @override
-  String get editProfile => 'Edit Profile';
+  String get editProfile => 'Photo Gallery';
 
   @override
   String get familyList => 'Family';
@@ -110,4 +110,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emailisnotvalid => 'Email is not valid';
+
+  @override
+  String get telUsPost => 'Tell us about the post you want to create';
+
+  @override
+  String get family => 'Family';
+
+  @override
+  String get addPostTitle => 'New Post';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get post => 'POST';
 }

@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
 import '../../generated/assets.dart';
 import '../../provider/auth_provider.dart';
 import '../../utils/theme_colors.dart';
@@ -20,17 +21,17 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
 
 
+  late AuthProvider appProvider;
 
   void onStartUp() async {
-
-    await Future.delayed(const Duration(seconds: 2));
-    final appProvider = GetIt.instance<AuthProvider>();
+    await Future.delayed(Duration(seconds: 2));
     await appProvider.onAppStart();
+    await appProvider.getUserDetail();
   }
 
   @override
   void initState() {
-    onStartUp();
+    appProvider = Provider.of<AuthProvider>(context, listen: false);
     super.initState();
   }
 
@@ -40,6 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
+    onStartUp();
 
 
 

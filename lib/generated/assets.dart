@@ -20,8 +20,11 @@ class Assets {
   static const String iconsMessageText = 'assets/icons/message-text.svg';
   static const String iconsMessages = 'assets/icons/messages.svg';
   static const String iconsMore = 'assets/icons/more.svg';
+  static const String iconsNotificationBing = 'assets/icons/notification_bing.svg';
   static const String iconsProfile2user = 'assets/icons/profile_2user.svg';
+  static const String iconsSend2 = 'assets/icons/send_2.svg';
   static const String iconsSmsTracking = 'assets/icons/sms_tracking.svg';
+  static const String iconsTrash = 'assets/icons/trash.svg';
   static const String iconsUser = 'assets/icons/user.svg';
   static const String iconsWarning = 'assets/icons/warning.svg';
   static const String imagesFile = 'assets/images/file.jpeg';

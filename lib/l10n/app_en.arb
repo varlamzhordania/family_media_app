@@ -22,8 +22,8 @@
   "no": "no",
   "yes": "yes",
   "chooseFromGallery": "Choose From Gallery",
-  "takeAPhoto": "Take A Photo",
-  "editProfile": "Edit Profile",
+  "takeAPhoto": "Camera",
+  "editProfile": "Photo Gallery",
   "familyList": "Family",
   "signInDec": "Sign in to your account to continue.",
   "forgetYourPassword": "forget your password ?",
@@ -34,7 +34,13 @@
   "please_enter_password": "Please Enter Your Password",
   "ok": "ok",
   "pleaseEnterAllFields": "Please enter all fields",
-  "emailisnotvalid": "Email is not valid"
+  "emailisnotvalid": "Email is not valid",
+  "telUsPost": "Tell us about the post you want to create",
+  "family": "Family",
+  "addPostTitle": "New Post",
+  "cancel": "Cancel",
+  "post": "POST"
+
 
 
 

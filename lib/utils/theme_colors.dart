@@ -15,6 +15,18 @@ const cardColorBlue = LinearGradient(
 ]);
 
 
+
+
+const cardColorBlueSend = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Color(0x4D6C63FF),
+      Color(0x5F5AB2FF),
+      // Color(0xFFe1bee7),
+    ]);
+
+
 const cardColorRed = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
