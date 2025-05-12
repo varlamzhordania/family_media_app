@@ -125,4 +125,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get post => 'POST';
+
+  @override
+  String get selectMedia => 'Select Media';
+
+  @override
+  String get writeyoucomment => 'Write you comment';
+
+  @override
+  String get theInputMustbeEmail => 'The input must be email';
+
+  @override
+  String get passwordMustBeSame => 'Password must be same';
+
+  @override
+  String get passwordToShort => 'This password is too short. It must contain at least 8 characters.';
+
+  @override
+  String get containsACapitaLetter => 'Contains a capital letter';
+
+  @override
+  String get containANumber => 'Contains a number';
+
+  @override
+  String get containASpacialCharacter => 'Contains spacial character';
+
+  @override
+  String get events => 'Events';
 }

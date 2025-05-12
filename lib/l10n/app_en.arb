@@ -39,7 +39,17 @@
   "family": "Family",
   "addPostTitle": "New Post",
   "cancel": "Cancel",
-  "post": "POST"
+  "post": "POST",
+  "selectMedia": "Select Media",
+  "writeyoucomment": "Write you comment",
+  "theInputMustbeEmail": "The input must be email",
+  "passwordMustBeSame": "Password must be same",
+  "passwordToShort": "This password is too short. It must contain at least 8 characters.",
+  "containsACapitaLetter": "Contains a capital letter",
+  "containANumber": "Contains a number",
+  "containASpacialCharacter": "Contains spacial character",
+  "events": "Events"
+
 
 
 

@@ -2,6 +2,7 @@
 /// next : "http://api.example.org/accounts/?page=4"
 /// previous : "http://api.example.org/accounts/?page=2"
 /// results : [{"id":0,"author":{"relation":"string","member":{"id":0,"avatar":"string","initial_name":"string","full_name":"string","is_online":true},"family":"string","is_active":true},"likes":"string","created_at":"2025-05-08T09:30:02.315Z","updated_at":"2025-05-08T09:30:02.315Z","is_active":true,"text":"string","post":0}]
+library;
 
 class CommentModel {
   CommentModel({

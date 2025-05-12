@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/member/member_model.dart';
+
 class SharedPreferencesService {
 
   Future<bool> getBool(String key) async {
@@ -33,8 +35,7 @@ class SharedPreferencesService {
   Future<Map<String, dynamic>> getObject(String key) async {
     final prefs = await SharedPreferences.getInstance();
     var data = prefs.getString(key) ?? "";
-
-    return jsonDecode(data) as Map<String, dynamic>;
+    return jsonDecode(data);
   }
 
   Future<void> setObject(String key,  Map<String, dynamic> value) async {
@@ -42,6 +43,27 @@ class SharedPreferencesService {
     await prefs.setString(key, jsonEncode(value));
   }
 
+
+  Future<void> setMemberObject(String key,  List<MemberModel> value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(key, jsonEncode(value));
+  }
+
+
+
+  Future<List<MemberModel>> getMemberObject(String key) async {
+    final prefs = await SharedPreferences.getInstance();
+    var data = prefs.getString(key) ?? "";
+    var jdMember = jsonDecode(data);
+    List<MemberModel> listMember = [];
+
+    if (jdMember != null) {
+      jdMember.forEach((v) {
+        listMember.add(MemberModel.fromJson(v));
+      });
+    }
+    return listMember;
+  }
 
 
 

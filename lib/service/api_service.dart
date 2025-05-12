@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../utils/Constant.dart';
@@ -86,9 +84,29 @@ class ApiService {
           Uri.parse('$baseUrl/api/posts/?page=$pageKey'),
           headers: <String, String> {
             'Content-Type': 'application/json; charset=UTF-8',
-            "Authorization": "Bearer " + userToken.toString()
+            "Authorization": "Bearer $userToken"
           },
 
+
+      );
+      return jsonDecode(response.body);
+
+    }catch(e){
+      throw Exception(e);
+    }
+  }
+
+
+  Future<Map<String, dynamic>> getSelfPosts(int pageKey) async{
+    final userToken =  await _getUserToken();
+
+    try{
+      final response = await http.get(
+        Uri.parse('$baseUrl/api/posts/self/?page=$pageKey'),
+        headers: <String, String> {
+          'Content-Type': 'application/json; charset=UTF-8',
+          "Authorization": "Bearer $userToken"
+        },
 
       );
       return jsonDecode(response.body);
@@ -107,7 +125,7 @@ class ApiService {
         Uri.parse('$baseUrl/api/accounts/user'),
         headers: <String, String> {
           'Content-Type': 'application/json; charset=UTF-8',
-          "Authorization": "Bearer " + userToken.toString()
+          "Authorization": "Bearer $userToken"
         },
 
 
@@ -131,7 +149,7 @@ class ApiService {
         Uri.parse('$baseUrl/api/posts/like/'),
         headers: <String, String> {
           'Content-Type': 'application/json; charset=UTF-8',
-          "Authorization": "Bearer " + userToken.toString()
+          "Authorization": "Bearer $userToken"
         },
 
 
@@ -154,7 +172,7 @@ class ApiService {
   Future<void> addPost(String familyId, String dec, List<String>? images) async{
     final userToken = await _getUserToken();
     
-    var requests = http.MultipartRequest('POST', Uri.parse('${baseUrl}/api/posts/'));
+    var requests = http.MultipartRequest('POST', Uri.parse('$baseUrl/api/posts/'));
 
     requests.fields['text'] = dec;
     requests.fields['family'] = familyId;
@@ -177,7 +195,7 @@ class ApiService {
 
     try{
       var response = await requests.send();
-      debugPrint("status code new post: " + response.statusCode.toString());
+      debugPrint("status code new post: ${response.statusCode}");
       if(response.statusCode == 201){
         return;
       }else{
@@ -205,7 +223,7 @@ class ApiService {
           Uri.parse('$baseUrl/api/posts/comments/?post=$postId&?page=$pageKey'),
           headers: <String, String> {
             'Content-Type': 'application/json; charset=UTF-8',
-            "Authorization": "Bearer " + userToken.toString()
+            "Authorization": "Bearer $userToken"
           },
       );
 
@@ -230,7 +248,7 @@ class ApiService {
           Uri.parse('$baseUrl/api/posts/comments/'),
           headers: <String, String> {
             'Content-Type': 'application/json; charset=UTF-8',
-            "Authorization": "Bearer " + userToken.toString()
+            "Authorization": "Bearer $userToken"
           },
 
 

@@ -1,4 +1,3 @@
-import 'package:familyarbore/main.dart';
 import 'package:familyarbore/provider/auth_provider.dart';
 import 'package:familyarbore/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
@@ -70,10 +69,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       ),
                       child:  Center(
                         child: authProvider.is_success ?
-                         Icon(
+                         const Icon(
                           Icons.check_circle, size: 30, color: successColor,)
                           :
-                        Icon(
+                        const Icon(
                           Icons.error, size: 30, color: errorColor,)
                       ),
                     ),
@@ -107,11 +106,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
 
 
       }else{
-        Fluttertoast.showToast(msg: "The Input Must be Email");
+        Fluttertoast.showToast(msg: AppLocalizations.of(context)!.theInputMustbeEmail);
       }
 
     }else{
-      Fluttertoast.showToast(msg: "Please Enter Your Email");
+      Fluttertoast.showToast(msg: AppLocalizations.of(context)!.pleaseEnterYouEmail);
     }
 
 
@@ -126,8 +125,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
 
-    double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
 
 
@@ -141,7 +140,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           body: Stack(
             children: [
               SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
@@ -175,7 +174,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             ),
                           ),
                           SizedBox(
-                            width: _width * 0.2
+                            width: width * 0.2
                           ),
                           Text(
                               AppLocalizations.of(context)!
@@ -189,10 +188,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     ),
                 
                     SizedBox(
-                      width: _width,
-                      height: _height ,
+                      width: width,
+                      height: height ,
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, _height * 0.1, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, height * 0.1, 0, 0),
                         child: CustomPaint(
                             painter: const MyCustomPainter([2, 3, 2]),
                             child: Padding(
@@ -210,8 +209,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                       })
                                     },
                                     child: SizedBox(
-                                      width: _width,
-                                      height: _height * 0.5,
+                                      width: width,
+                                      height: height * 0.5,
                                       child: Card(
                                         color: Colors.white,
                                         child: Padding(
@@ -241,7 +240,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                                 
                                                 
                                               SizedBox(
-                                                height: _height * 0.06,
+                                                height: height * 0.06,
                                                 child: Focus(
                                                   onFocusChange: (value) {
                                                     setState(() {
@@ -294,8 +293,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                                     forgotPasswordViaEmail();
                                                   },
                                                   child: Container(
-                                                      width: _width * 0.6,
-                                                      height: _height * 0.067,
+                                                      width: width * 0.6,
+                                                      height: height * 0.067,
                                                       decoration: BoxDecoration(
                                                           gradient: cardColorBlue,
                                                           borderRadius: BorderRadius.circular(15)
@@ -316,7 +315,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                                                 AppLocalizations.of(context)!.sendEmail, // Text displayed on the button
                                                                 style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white)),
                                                             SizedBox(
-                                                              width: _width * 0.02,
+                                                              width: width * 0.02,
                                                             ),
 
 

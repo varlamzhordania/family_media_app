@@ -1,13 +1,11 @@
 
-import 'package:familyarbore/models/forgotPassword/forgot_model.dart';
 import 'package:familyarbore/models/login/login_model.dart';
+import 'package:familyarbore/models/member/member_model.dart';
 import 'package:familyarbore/service/api_service.dart';
 import 'package:familyarbore/service/sharedPreferences_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
-import '../screens/home_wrap/home_wrap_screen.dart';
 import '../utils/Constant.dart';
 
 class AuthProvider with ChangeNotifier {
@@ -37,10 +35,10 @@ class AuthProvider with ChangeNotifier {
 
 
 
-  Future<void> setUserToken(String _token, String _refresh, String _expirein) async {
-    await preferences.setString(ACCESS_TOKEN, _token);
-    await preferences.setString(REFRESH_TOKEN, _refresh);
-    await preferences.setString(EXPIRE_IN, _expirein);
+  Future<void> setUserToken(String token, String refresh, String expirein) async {
+    await preferences.setString(ACCESS_TOKEN, token);
+    await preferences.setString(REFRESH_TOKEN, refresh);
+    await preferences.setString(EXPIRE_IN, expirein);
     await preferences.setBool(LOG_IN, true);
 
 
@@ -54,11 +52,20 @@ class AuthProvider with ChangeNotifier {
 
   Future<void> setUserDetails(Map<String, dynamic> detail) async {
 
-    debugPrint("user:  " + detail['user']);
-    debugPrint("members:  " + detail['MEMBERSHIP'][0]);
+    await preferences.setObject(USER, detail['user']);
 
-    await preferences.setObject("USER", detail['user']);
-    await preferences.setObject("MEMBERSHIP", detail['memberships'][0]);
+    List<MemberModel> res = [];
+
+
+
+    if (detail['memberships'] != null) {
+      detail['memberships'].forEach((v) {
+        debugPrint("family is: $v");
+        res.add(MemberModel.fromJson(v));
+      });
+    }
+
+    await preferences.setMemberObject(MEMBERSHIP, res);
     notifyListeners();
   }
 
@@ -77,7 +84,7 @@ class AuthProvider with ChangeNotifier {
       _forgotMessage = response;
       _is_success = response.toString().contains("Successful");
 
-      await Future.delayed(Duration(seconds: 5));
+      await Future.delayed(const Duration(seconds: 5));
 
       notifyListeners();
 
@@ -140,11 +147,11 @@ class AuthProvider with ChangeNotifier {
             loginModel.expiresIn.toString()
         );
 
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(const Duration(seconds: 1));
 
         _isAuthenticated = true;
         _hasSeenGetStarted = true;
-        await Future.delayed(Duration(seconds: 1));
+        await Future.delayed(const Duration(seconds: 1));
 
         notifyListeners();
 
@@ -153,7 +160,7 @@ class AuthProvider with ChangeNotifier {
       }
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
-      throw(e);
+      rethrow;
     } finally {
       _is_loading = false;
       notifyListeners();
@@ -188,7 +195,7 @@ class AuthProvider with ChangeNotifier {
 
     }catch (e) {
       Fluttertoast.showToast(msg: e.toString());
-      throw(e);
+      rethrow;
     }finally{
       _is_loading = false;
       notifyListeners();

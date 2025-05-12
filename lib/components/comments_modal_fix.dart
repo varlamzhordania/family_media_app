@@ -1,4 +1,6 @@
 // Create a separate StatefulWidget for the comments modal
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../generated/assets.dart';
 import '../models/comments/comments_model.dart';
@@ -18,11 +21,11 @@ class CommentsModal extends StatefulWidget {
   final double width;
 
   const CommentsModal({
-    Key? key,
+    super.key,
     required this.postId,
     required this.height,
     required this.width,
-  }) : super(key: key);
+  });
 
   @override
   _CommentsModalState createState() => _CommentsModalState();
@@ -95,7 +98,6 @@ class _CommentsModalState extends State<CommentsModal> {
 
       try {
 
-        debugPrint("postid: ${widget.postId}");
 
         await postProvider.addCommentsPost({"post_id": widget.postId,"text": commentController.text.toString()}).then((onValue){
           _fetchNextPageComments();
@@ -111,7 +113,7 @@ class _CommentsModalState extends State<CommentsModal> {
         commentController.clear();
       }
     }else{
-      Fluttertoast.showToast(msg: "write you comment");
+      Fluttertoast.showToast(msg: AppLocalizations.of(context)!.writeyoucomment);
     }
   }
 
@@ -182,7 +184,7 @@ class _CommentsModalState extends State<CommentsModal> {
                                           )
                                       ),
                                       TextSpan(
-                                          text: item.text,
+                                          text: utf8.decode(item.text.toString().runes.toList()),
                                           style: GoogleFonts.rubik().copyWith(
                                               color: textColorBody,
                                               fontSize: 10,
@@ -194,10 +196,10 @@ class _CommentsModalState extends State<CommentsModal> {
                               ),
                             );
                           },
-                          noItemsFoundIndicatorBuilder: (_) => Center(
+                          noItemsFoundIndicatorBuilder: (_) => const Center(
                             child: Text('No comments yet'),
                           ),
-                          firstPageErrorIndicatorBuilder: (_) => Center(
+                          firstPageErrorIndicatorBuilder: (_) => const Center(
                             child: Text('Error loading comments. Tap to retry.'),
                           ),
                         ),

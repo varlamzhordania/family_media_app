@@ -7,6 +7,7 @@
 /// bio : "string"
 /// phone_number : "string"
 /// is_online : true
+library;
 
 class RegisterModel {
   RegisterModel({

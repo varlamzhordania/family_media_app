@@ -1,7 +1,6 @@
 
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -12,7 +11,7 @@ class RandomFloatingBubble extends StatefulWidget {
   final bool shrink;
   final bool clustering;
 
-  RandomFloatingBubble({
+  const RandomFloatingBubble({super.key, 
     required this.text,
     required this.isSelected,
     required this.onTap,
@@ -72,7 +71,7 @@ class _RandomFloatingBubbleState extends State<RandomFloatingBubble>
           child: GestureDetector(
             onTap: widget.onTap,
             child: AnimatedContainer(
-              duration: Duration(milliseconds: 400),
+              duration: const Duration(milliseconds: 400),
               curve: Curves.easeOut,
               width: widget.isSelected
                   ? 160
@@ -84,7 +83,7 @@ class _RandomFloatingBubbleState extends State<RandomFloatingBubble>
                   : widget.shrink
                   ? 20
                   : 30,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white,
                 boxShadow: [
@@ -128,7 +127,7 @@ class _RandomFloatingBubbleState extends State<RandomFloatingBubble>
                           imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/55/Justin_Bieber_in_Rosemont%2C_Illinois_%282015%29_%28cropped%29.jpg",
                           progressIndicatorBuilder: (context, url, downloadProgress) =>
                               CircularProgressIndicator(value: downloadProgress.progress),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          errorWidget: (context, url, error) => const Icon(Icons.error),
                           width: widget.isSelected
                               ? 160 : 30, height: widget.isSelected
                             ? 160 : 30, fit: BoxFit.fill,)
@@ -149,7 +148,7 @@ class _RandomFloatingBubbleState extends State<RandomFloatingBubble>
                       ),
                     ),
                   ):
-                  SizedBox()
+                  const SizedBox()
                 ],
               ),
             ),

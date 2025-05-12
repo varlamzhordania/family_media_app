@@ -62,8 +62,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
     return SafeArea(
       child: Scaffold(
@@ -102,7 +102,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
 
                     SizedBox(
-                        width: _width * 0.27,
+                        width: width * 0.27,
                      ),
 
                     Text(
@@ -111,7 +111,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: _height * 0.01,
+                  height: height * 0.01,
                 ),
                 Align(
                   alignment: Alignment.center,
@@ -150,7 +150,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 context: context,
                                 builder: (builder) {
                                   return Container(
-                                    height: _height * 0.2,
+                                    height: height * 0.2,
                                     color: Colors.transparent,
                                     //could change this to Color(0xFF737373),
                                     //so you don't have to change MaterialApp canvasColor
@@ -169,7 +169,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                                SizedBox(
-                                                height: _height * 0.05,
+                                                height: height * 0.05,
                                               ),
 
                                               GestureDetector(
@@ -257,7 +257,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   height: 20,
                 ),
                 SizedBox(
-                  height: _height * 0.06,
+                  height: height * 0.06,
                   child: Focus(
                     onFocusChange: (value) {
                       setState(() {
@@ -307,7 +307,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   height: 10,
                 ),
                 SizedBox(
-                  height: _height * 0.06,
+                  height: height * 0.06,
                   child: Focus(
                     onFocusChange: (value) {
                       setState(() {
@@ -353,7 +353,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   height: 10,
                 ),
                 SizedBox(
-                  height: _height * 0.06,
+                  height: height * 0.06,
                   child: Focus(
                     onFocusChange: (value) {
                       setState(() {
@@ -399,7 +399,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   height: 10,
                 ),
                 SizedBox(
-                  height: _height * 0.06,
+                  height: height * 0.06,
                   child: Focus(
                     onFocusChange: (value) {
                       setState(() {
@@ -472,7 +472,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   height: 10,
                 ),
                 SizedBox(
-                  height: _height * 0.06,
+                  height: height * 0.06,
                   child: Focus(
                     onFocusChange: (value) {
                       setState(() {
@@ -550,8 +550,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
                 Center(
                   child: Container(
-                      width: _width * 0.6,
-                      height: _height * 0.067,
+                      width: width * 0.6,
+                      height: height * 0.067,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(15),
@@ -570,7 +570,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   fontWeight: FontWeight.w400,
                                   color: btnColor)),
                           SizedBox(
-                            width: _width * 0.02,
+                            width: width * 0.02,
                           ),
 
                           // SvgPicture.asset(

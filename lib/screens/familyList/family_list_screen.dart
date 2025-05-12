@@ -34,17 +34,17 @@ class _FamilyListScreenState extends State<FamilyListScreen> {
     "+"
   ];
 
-  String _selectedCompany = "";
+  final String _selectedCompany = "";
 
-  List<DropdownMenuItem> _dropdownMenuItems = [
-    DropdownMenuItem(child: Text("Test")),
-    DropdownMenuItem(child: Text("Test2"))
+  final List<DropdownMenuItem> _dropdownMenuItems = [
+    const DropdownMenuItem(child: Text("Test")),
+    const DropdownMenuItem(child: Text("Test2"))
   ];
 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
     return SafeArea(
         child: Scaffold(
@@ -79,7 +79,7 @@ class _FamilyListScreenState extends State<FamilyListScreen> {
                   ),
                 ),
                 SizedBox(
-                  width: _width * 0.27,
+                  width: width * 0.27,
                 ),
                 Text(
                     AppLocalizations.of(context)!
@@ -114,9 +114,9 @@ class _FamilyListScreenState extends State<FamilyListScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  profile(),
+                                  const profile(),
                                   SizedBox(
-                                    width: _width * 0.03,
+                                    width: width * 0.03,
                                   ),
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,12 +138,12 @@ class _FamilyListScreenState extends State<FamilyListScreen> {
                           
                           
                               SizedBox(
-                                width: _width,
-                                height: _height * 0.1,
+                                width: width,
+                                height: height * 0.1,
                                 child: ListView(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   children: groupMembers.map((member) {
                           
                                     return profileTextLikeImage(memberName: member);

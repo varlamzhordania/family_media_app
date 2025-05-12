@@ -14,6 +14,7 @@ class Assets {
   static const String iconsHeart = 'assets/icons/heart.svg';
   static const String iconsHeartFill = 'assets/icons/heart_fill.svg';
   static const String iconsHome = 'assets/icons/home.svg';
+  static const String iconsInfoCircle = 'assets/icons/info_circle.svg';
   static const String iconsLock = 'assets/icons/lock.svg';
   static const String iconsLogo = 'assets/icons/logo.jpg';
   static const String iconsLogout = 'assets/icons/logout.svg';
@@ -32,6 +33,8 @@ class Assets {
   static const String imagesPROFILE = 'assets/images/PROFILE.svg';
   static const String imagesPROFILETest = 'assets/images/PROFILE_test.png';
   static const String imagesParents = 'assets/images/parents.png';
+  static const String imagesPatt = 'assets/images/patt.svg';
+  static const String imagesPatterns = 'assets/images/patterns.svg';
   static const String imagesTest = 'assets/images/test.jpeg';
   static const String imagesUser = 'assets/images/user.png';
   static const String lottiesAnimBoardStart = 'assets/lotties/animBoardStart.json';

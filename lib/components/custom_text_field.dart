@@ -11,7 +11,7 @@ class CustomTextField extends StatefulWidget {
   final Function(bool)? onFocusChange;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.hintText,
     this.hintStyle,
@@ -20,7 +20,7 @@ class CustomTextField extends StatefulWidget {
     required this.unfocusedColor,
     required this.prefixIconPath,
     this.onFocusChange,
-  }) : super(key: key);
+  });
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -58,7 +58,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
+              borderRadius: const BorderRadius.all(Radius.circular(12)),
               borderSide: BorderSide(color: widget.focusedColor),
             ),
             hintText: widget.hintText,

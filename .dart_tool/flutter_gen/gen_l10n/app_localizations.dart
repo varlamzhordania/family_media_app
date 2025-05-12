@@ -332,6 +332,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'POST'**
   String get post;
+
+  /// No description provided for @selectMedia.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Media'**
+  String get selectMedia;
+
+  /// No description provided for @writeyoucomment.
+  ///
+  /// In en, this message translates to:
+  /// **'Write you comment'**
+  String get writeyoucomment;
+
+  /// No description provided for @theInputMustbeEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'The input must be email'**
+  String get theInputMustbeEmail;
+
+  /// No description provided for @passwordMustBeSame.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be same'**
+  String get passwordMustBeSame;
+
+  /// No description provided for @passwordToShort.
+  ///
+  /// In en, this message translates to:
+  /// **'This password is too short. It must contain at least 8 characters.'**
+  String get passwordToShort;
+
+  /// No description provided for @containsACapitaLetter.
+  ///
+  /// In en, this message translates to:
+  /// **'Contains a capital letter'**
+  String get containsACapitaLetter;
+
+  /// No description provided for @containANumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Contains a number'**
+  String get containANumber;
+
+  /// No description provided for @containASpacialCharacter.
+  ///
+  /// In en, this message translates to:
+  /// **'Contains spacial character'**
+  String get containASpacialCharacter;
+
+  /// No description provided for @events.
+  ///
+  /// In en, this message translates to:
+  /// **'Events'**
+  String get events;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

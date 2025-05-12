@@ -1,6 +1,5 @@
 
 
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 
@@ -8,7 +7,7 @@ import 'components/animation_family.dart';
 
 class BubbleScreen extends StatefulWidget {
   List<String>? bubbles;
-  BubbleScreen({required this.bubbles});
+  BubbleScreen({super.key, required this.bubbles});
 
   @override
   _BubbleScreenState createState() => _BubbleScreenState();
@@ -27,7 +26,7 @@ class _BubbleScreenState extends State<BubbleScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Interactive Bubble Animation'),
+        title: const Text('Interactive Bubble Animation'),
       ),
       body: SingleChildScrollView(
         child: Center(

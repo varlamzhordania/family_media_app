@@ -6,7 +6,6 @@ import 'package:familyarbore/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -113,7 +112,7 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                             color: textColorBody)),
 
 
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Center(
@@ -183,14 +182,14 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
             }
           }else{
             Fluttertoast.showToast(
-                msg: "Password must be same");
+                msg: AppLocalizations.of(context)!.passwordMustBeSame);
           }
         }else {
           Fluttertoast.showToast(
-              msg: "This password is too short. It must contain at least 8 characters.");
+              msg: AppLocalizations.of(context)!.passwordToShort);
         }
       }else{
-        Fluttertoast.showToast(msg: "PLease Enter All Fields");
+        Fluttertoast.showToast(msg: AppLocalizations.of(context)!.pleaseEnterAllFields);
       }
     }
 
@@ -202,8 +201,8 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
   @override
   Widget build(BuildContext context) {
 
-    double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
     return  SafeArea(
       child: Scaffold(
@@ -246,7 +245,7 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                             ),
                           ),
                           SizedBox(
-                              width: _width * 0.27
+                              width: width * 0.27
                           ),
                           Text(
                               AppLocalizations.of(context)!
@@ -260,10 +259,10 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                     ),
 
                     SizedBox(
-                      width: _width,
-                      height: _height ,
+                      width: width,
+                      height: height ,
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, _height * 0.1, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, height * 0.1, 0, 0),
                         child: CustomPaint(
                             painter: const MyCustomPainter([2, 3, 2]),
                             child: Padding(
@@ -282,8 +281,8 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                                       })
                                     },
                                     child: SizedBox(
-                                      width: _width,
-                                      height: _height * 0.6,
+                                      width: width,
+                                      height: height * 0.6,
                                       child: Card(
                                         color: Colors.white,
                                         child: Padding(
@@ -307,12 +306,12 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                                               ),
 
                                               SizedBox(
-                                                height: _height * 0.02,
+                                                height: height * 0.02,
                                               ),
 
 
                                               SizedBox(
-                                                height: _height * 0.06,
+                                                height: height * 0.06,
                                                 child: Focus(
                                                   onFocusChange: (value) {
                                                     setState(() {
@@ -420,14 +419,14 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
 
 
                                               SizedBox(
-                                                height: _height * 0.01,
+                                                height: height * 0.01,
                                               ),
 
 
 
 
                                               SizedBox(
-                                                height: _height * 0.06,
+                                                height: height * 0.06,
                                                 child: Focus(
                                                   onFocusChange: (value) {
                                                     setState(() {
@@ -495,7 +494,7 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                                               ),
 
                                               SizedBox(
-                                                height: _height * 0.02,
+                                                height: height * 0.02,
                                               ),
 
 
@@ -518,13 +517,13 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                                                   ),
 
                                                   Text(
-                                                    "Contains a capital letter",
+                                                    AppLocalizations.of(context)!.containsACapitaLetter,
                                                     style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: containCapital ? successColor : hintColor),
                                                   ),
                                                 ],
                                               ),
                                               SizedBox(
-                                                height: _height * 0.01,
+                                                height: height * 0.01,
                                               ),
                                               Row(
                                                 children: [
@@ -545,7 +544,7 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                                                   ),
 
                                                   Text(
-                                                    "Contains a number",
+                                                    AppLocalizations.of(context)!.containANumber,
                                                     style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: containNumber ? successColor : hintColor),
                                                   ),
                                                 ],
@@ -553,7 +552,7 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
 
 
                                               SizedBox(
-                                                height: _height * 0.01,
+                                                height: height * 0.01,
                                               ),
 
                                               Row(
@@ -575,7 +574,7 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                                                   ),
 
                                                   Text(
-                                                    "Contains spacial character",
+                                                    AppLocalizations.of(context)!.containASpacialCharacter,
                                                     style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: containCharacter ? successColor : hintColor),
                                                   ),
                                                 ],
@@ -583,7 +582,7 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
 
 
                                               SizedBox(
-                                                height: _height * 0.05,
+                                                height: height * 0.05,
                                               ),
 
 
@@ -594,8 +593,8 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
 
                                                   },
                                                   child: Container(
-                                                      width: _width * 0.6,
-                                                      height: _height * 0.067,
+                                                      width: width * 0.6,
+                                                      height: height * 0.067,
                                                       decoration: BoxDecoration(
                                                           gradient: cardColorBlue,
                                                           borderRadius: BorderRadius.circular(15)
@@ -616,7 +615,7 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                                                                 AppLocalizations.of(context)!.signUpTitle, // Text displayed on the button
                                                                 style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white)),
                                                             SizedBox(
-                                                              width: _width * 0.02,
+                                                              width: width * 0.02,
                                                             ),
 
 
@@ -640,31 +639,6 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                                               const SizedBox(
                                                 height: 10,
                                               ),
-
-
-
-
-
-                                              // Center(
-                                              //   child: Text(
-                                              //     "Or",
-                                              //     style: GoogleFonts.rubik().copyWith(fontSize: 17, fontWeight: FontWeight.w600, color: hintColor),
-                                              //   ),
-                                              // ),
-
-                                              // SizedBox(
-                                              //   height: 2,
-                                              // ),
-
-
-
-
-
-
-
-
-
-
 
                                             ],
                                           ),

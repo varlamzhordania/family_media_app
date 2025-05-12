@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:familyarbore/provider/auth_provider.dart';
 import 'package:familyarbore/screens/auth/register/register_password_screen.dart';
+import 'package:familyarbore/screens/createPost/create_post_screen.dart';
 import 'package:familyarbore/screens/get_start/get_start_screen.dart';
 import 'package:familyarbore/screens/home_wrap/home_wrap_screen.dart';
+import 'package:familyarbore/screens/requests/requests_screen.dart';
 import 'package:familyarbore/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -26,6 +28,22 @@ GoRouter appRouter(BuildContext context) => GoRouter(
           name: SplashScreen.routeName,
           builder: (context, state) {
             return const SplashScreen();
+          },
+        ),
+
+        GoRoute(
+          path: CreatePostScreen.routeName,
+          name: CreatePostScreen.routeName,
+          builder: (context, state) {
+            return const CreatePostScreen();
+          },
+        ),
+
+        GoRoute(
+          path: RequestsScreen.routeName,
+          name: RequestsScreen.routeName,
+          builder: (context, state) {
+            return const RequestsScreen();
           },
         ),
         GoRoute(
@@ -113,8 +131,10 @@ GoRouter appRouter(BuildContext context) => GoRouter(
         if (isAuthenticated) {
           if (state.matchedLocation == (HomeWrapScreen.routeName) ||
               state.matchedLocation == ProfileScreen.routeName ||
+              state.matchedLocation == CreatePostScreen.routeName ||
               state.matchedLocation == EditProfileScreen.routeName ||
-              state.matchedLocation == FamilyListScreen.routeName) {
+              state.matchedLocation == RequestsScreen.routeName ||
+          state.matchedLocation == FamilyListScreen.routeName) {
             return null; // Allow access to these routes when authenticated
           }
 

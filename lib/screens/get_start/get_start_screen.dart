@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import '../../generated/assets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
@@ -47,14 +46,14 @@ class GetStartScreenState extends State<GetStartScreen> {
   Widget build(BuildContext context) {
 
 
-    double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
 
     final pageDecoration = PageDecoration(
-      titleTextStyle: GoogleFonts.rubik(textStyle: TextStyle(fontWeight: FontWeight.w700, color: textColor, fontSize: 20)),
-      bodyTextStyle: GoogleFonts.rubik(textStyle: TextStyle(fontWeight: FontWeight.w400, color: textColorBody, fontSize: 15)),
-      bodyPadding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+      titleTextStyle: GoogleFonts.rubik(textStyle: const TextStyle(fontWeight: FontWeight.w700, color: textColor, fontSize: 20)),
+      bodyTextStyle: GoogleFonts.rubik(textStyle: const TextStyle(fontWeight: FontWeight.w400, color: textColorBody, fontSize: 15)),
+      bodyPadding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
       pageColor: backgroundColor,
       imagePadding: EdgeInsets.zero,
     );
@@ -65,35 +64,12 @@ class GetStartScreenState extends State<GetStartScreen> {
       allowImplicitScrolling: false,
       // autoScrollDuration: 3000,
       infiniteAutoScroll: false,
-      // globalHeader: Align(
-      //   alignment: Alignment.topRight,
-      //   child: SafeArea(
-      //     child: Padding(
-      //       padding: const EdgeInsets.only(top: 16, right: 16),
-      //       child: SizedBox(
-      //           height: _height * 0.31,
-      //           child: Lottie.asset(Assets.lottiesAnimBoardStart)
-      //       ),
-      //     ),
-      //   ),
-      // ),
-      // globalFooter: SizedBox(
-      //   width: double.infinity,
-      //   height: 60,
-      //   child: ElevatedButton(
-      //     child: const Text(
-      //       'Let\'s go right away!',
-      //       style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-      //     ),
-      //     onPressed: () => _onIntroEnd(context),
-      //   ),
-      // ),
       pages: [
         PageViewModel(
           title: AppLocalizations.of(context)!.greeting,
           body: AppLocalizations.of(context)!.dec,
           image: SizedBox(
-              height: _height * 0.31,
+              height: height * 0.31,
               child: Lottie.asset(Assets.lottiesAnimBoardStart)
           ),
           decoration: pageDecoration,
@@ -103,7 +79,7 @@ class GetStartScreenState extends State<GetStartScreen> {
           body:
           "Download the Stockpile app and master the market with our mini-lesson.",
           image: SizedBox(
-              height: _height * 0.31,
+              height: height * 0.31,
               child: Lottie.asset(Assets.lottiesChatAnim)
           ),
           decoration: pageDecoration,
@@ -113,7 +89,7 @@ class GetStartScreenState extends State<GetStartScreen> {
           body:
           "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis ",
           image: SizedBox(
-              height: _height * 0.31,
+              height: height * 0.31,
               child: Lottie.asset(Assets.lottiesMediaAnim)
           ),
           decoration: pageDecoration,
@@ -129,13 +105,13 @@ class GetStartScreenState extends State<GetStartScreen> {
       showBackButton: false,
       //rtl: true, // Display as right-to-left
       back: const Icon(Icons.arrow_back),
-      skip:  Text('Skip', style: GoogleFonts.rubik(textStyle: TextStyle(fontWeight: FontWeight.w600, color: Colors.black))),
+      skip:  Text('Skip', style: GoogleFonts.rubik(textStyle: const TextStyle(fontWeight: FontWeight.w600, color: Colors.black))),
       next: const Icon(Icons.arrow_forward),
-      done:  Text('Done', style: GoogleFonts.rubik(textStyle: TextStyle(fontWeight: FontWeight.w600, color: Colors.black))),
+      done:  Text('Done', style: GoogleFonts.rubik(textStyle: const TextStyle(fontWeight: FontWeight.w600, color: Colors.black))),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
       controlsPadding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
-      dotsDecorator:  DotsDecorator(
+      dotsDecorator:  const DotsDecorator(
         size: Size(10.0, 10.0),
         color: Color(0xFFBDBDBD),
         activeSize: Size(22.0, 10.0),

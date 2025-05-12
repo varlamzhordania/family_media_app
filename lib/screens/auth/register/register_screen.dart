@@ -91,10 +91,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                       child:  Center(
                           child: authProvider.is_success ?
-                          Icon(
+                          const Icon(
                             Icons.check_circle, size: 30, color: successColor,)
                               :
-                          Icon(
+                          const Icon(
                             Icons.error, size: 30, color: errorColor,)
                       ),
                     ),
@@ -105,7 +105,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             fontWeight: FontWeight.w400,
                             color: textColorBody)),
 
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
 
@@ -131,7 +131,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               children: [
 
                                 Text(
-                                    "OK", // Text displayed on the button
+                                    AppLocalizations.of(context)!.ok, // Text displayed on the button
                                     style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: btnColor)),
 
                               ],
@@ -155,8 +155,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
 
-    double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
     return  SafeArea(
       child: Scaffold(
@@ -199,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         SizedBox(
-                            width: _width * 0.3
+                            width: width * 0.3
                         ),
                         Text(
                             AppLocalizations.of(context)!
@@ -213,10 +213,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
 
                   SizedBox(
-                    width: _width,
-                    height: _height ,
+                    width: width,
+                    height: height ,
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, _height * 0.1, 0, 0),
+                      padding: EdgeInsets.fromLTRB(0, height * 0.1, 0, 0),
                       child: CustomPaint(
                           painter: const MyCustomPainter([2, 3, 2]),
                           child: Padding(
@@ -235,8 +235,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     })
                                   },
                                   child: SizedBox(
-                                    width: _width,
-                                    height: _height * 0.6,
+                                    width: width,
+                                    height: height * 0.6,
                                     child: Card(
                                       color: Colors.white,
                                       child: Padding(
@@ -269,8 +269,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
                                                 SizedBox(
-                                                  height: _height * 0.06,
-                                                  width: _width * 0.4,
+                                                  height: height * 0.06,
+                                                  width: width * 0.4,
                                                   child: Focus(
                                                     onFocusChange: (value) {
                                                       setState(() {
@@ -315,8 +315,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   ),
                                                 ),
                                                 SizedBox(
-                                                  height: _height * 0.06,
-                                                  width: _width * 0.4,
+                                                  height: height * 0.06,
+                                                  width: width * 0.4,
                                                   child: Focus(
                                                     onFocusChange: (value) {
                                                       setState(() {
@@ -365,7 +365,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 
                                             SizedBox(
-                                              height: _height * 0.06,
+                                              height: height * 0.06,
                                               child: Focus(
                                                 onFocusChange: (value) {
                                                   setState(() {
@@ -418,7 +418,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                               child: InkWell(
                                                 onTap: (){
 
-                                                  var _data = {"email": emailEditingController.text.toString(),
+                                                  var data = {"email": emailEditingController.text.toString(),
                                                     "first_name": firstNameEditingController.text.toString(),
                                                     "last_name": lastNameEditingController.text.toString(),
                                                   };
@@ -426,19 +426,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                                                   if(emailEditingController.text.toString().isNotEmpty && emailEditingController.text.toString().isNotEmpty && lastNameEditingController.text.toString().isNotEmpty){
                                                     if(emailEditingController.text.toString().contains("@")){
-                                                      context.push("${LoginScreen.routeName}${RegisterPasswordScreen.routeName}", extra: _data);
+                                                      context.push("${LoginScreen.routeName}${RegisterPasswordScreen.routeName}", extra: data);
                                                     }else{
-                                                      Fluttertoast.showToast(msg: "Please Enter A Valid Email");
+                                                      Fluttertoast.showToast(msg: AppLocalizations.of(context)!.emailisnotvalid);
                                                     }
                                                   }else{
-                                                    Fluttertoast.showToast(msg: "PLease Enter All Fields");
+                                                    Fluttertoast.showToast(msg: AppLocalizations.of(context)!.pleaseEnterAllFields);
                                                   }
 
 
                                                 },
                                                 child: Container(
-                                                    width: _width * 0.6,
-                                                    height: _height * 0.067,
+                                                    width: width * 0.6,
+                                                    height: height * 0.067,
                                                     decoration: BoxDecoration(
                                                         gradient: cardColorBlue,
                                                         borderRadius: BorderRadius.circular(15)
@@ -459,7 +459,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                               AppLocalizations.of(context)!.continue_text, // Text displayed on the button
                                                               style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white)),
                                                           SizedBox(
-                                                            width: _width * 0.02,
+                                                            width: width * 0.02,
                                                           ),
 
 
@@ -491,8 +491,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   onTap: ()=> context.push(LoginScreen.routeName),
 
                                                 child: Container(
-                                                    width: _width * 0.6,
-                                                    height: _height * 0.067,
+                                                    width: width * 0.6,
+                                                    height: height * 0.067,
                                                     decoration: BoxDecoration(
                                                         color: Colors.white,
                                                         borderRadius: BorderRadius.circular(15),
@@ -510,7 +510,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                             AppLocalizations.of(context)!.signIn, // Text displayed on the button
                                                             style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: btnColor)),
                                                         SizedBox(
-                                                          width: _width * 0.02,
+                                                          width: width * 0.02,
                                                         ),
 
 

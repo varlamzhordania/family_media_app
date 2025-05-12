@@ -1,7 +1,5 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -24,14 +22,16 @@ class _SplashScreenState extends State<SplashScreen> {
   late AuthProvider appProvider;
 
   void onStartUp() async {
-    await Future.delayed(Duration(seconds: 2));
-    await appProvider.onAppStart();
+    WidgetsFlutterBinding.ensureInitialized();
+    await Future.delayed(const Duration(seconds: 2));
     await appProvider.getUserDetail();
+    await appProvider.onAppStart();
   }
 
   @override
   void initState() {
     appProvider = Provider.of<AuthProvider>(context, listen: false);
+    onStartUp();
     super.initState();
   }
 
@@ -39,18 +39,18 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
-    onStartUp();
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
 
 
 
     return SafeArea(child: Scaffold(
       body: Container(
 
-        width: _width,
-        height: _height,
-        decoration: BoxDecoration(
+        width: width,
+        height: height,
+        decoration: const BoxDecoration(
           gradient: cardColorBlue
         ),
         
@@ -60,14 +60,14 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
 
             SizedBox(
-              height: _height * 0.2,
+              height: height * 0.2,
             ),
 
            Column(
              children: [
                Image.asset(Assets.imagesParents, width: 100, height: 150, color: Colors.white.withOpacity(0.3),),
                SizedBox(
-                 height: _height * 0.05,
+                 height: height * 0.05,
                ),
 
                Text(

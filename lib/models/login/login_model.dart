@@ -3,6 +3,7 @@
 /// token_type : "Bearer"
 /// scope : "read write"
 /// refresh_token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6Ikp3enFPdFdYdlRYV1pUT1BWUGEySEJaUHpQaHdEWSJ9.D40Jl7oTfr8Zk5ZlUx5Yz8KE3XaqvSfEBZxQfSbzpzc"
+library;
 
 class LoginModel {
   LoginModel({

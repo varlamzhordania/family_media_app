@@ -1,6 +1,3 @@
-import 'package:familyarbore/screens/auth/login/login_screen.dart';
-import 'package:familyarbore/screens/auth/register/register_screen.dart';
-import 'package:familyarbore/screens/get_start/get_start_screen.dart';
 import 'package:familyarbore/screens/home/home_screen.dart';
 import 'package:familyarbore/screens/message/message_screen.dart';
 import 'package:familyarbore/screens/profile/profile_screen.dart';
@@ -14,7 +11,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class Bottom_nav extends StatefulWidget {
-  Bottom_nav({Key? key}) : super(key: key);
+  const Bottom_nav({super.key});
   @override
   _MybottomnavState createState() => _MybottomnavState();
 }
@@ -22,15 +19,15 @@ class Bottom_nav extends StatefulWidget {
 class _MybottomnavState extends State<Bottom_nav> {
   @override
   Widget build(BuildContext context) {
-    PersistentTabController _controller;
+    PersistentTabController controller;
 
-    _controller = PersistentTabController(initialIndex: 0);
+    controller = PersistentTabController(initialIndex: 0);
 
     return PersistentTabView(
       backgroundColor: Colors.white,
       tabs: _tabs(context),
-      controller: _controller,
-      screenTransitionAnimation: ScreenTransitionAnimation(
+      controller: controller,
+      screenTransitionAnimation: const ScreenTransitionAnimation(
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),
       ),
@@ -82,7 +79,7 @@ List<PersistentTabConfig> _tabs(BuildContext context) => [
     ),
   ),
   PersistentTabConfig(
-    screen: ProfileScreen(),
+    screen: const ProfileScreen(),
     item: ItemConfig(
       icon: SvgPicture.asset(
         width: 20,

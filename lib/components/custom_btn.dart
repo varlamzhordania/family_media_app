@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:provider/provider.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class CustomButton extends StatelessWidget {
   final double width;
@@ -14,7 +12,7 @@ class CustomButton extends StatelessWidget {
   final bool isLoading;
 
   const CustomButton({
-    Key? key,
+    super.key,
     required this.width,
     required this.height,
     required this.btnColor,
@@ -23,7 +21,7 @@ class CustomButton extends StatelessWidget {
     required this.textStyle,
     required this.onPressed,
     required this.isLoading,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

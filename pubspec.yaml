@@ -58,6 +58,7 @@ dependencies:
   timeago: ^3.7.0
   dots_indicator: ^4.0.1
   choice: ^2.3.2
+  video_player: ^2.9.5
 
 
   # The following adds the Cupertino Icons font to your application.

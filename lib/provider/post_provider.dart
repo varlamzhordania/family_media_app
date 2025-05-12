@@ -1,11 +1,9 @@
 
-import 'dart:ffi';
 import 'package:familyarbore/models/posts/posts_model.dart';
 import 'package:familyarbore/service/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../models/comments/comment_model.dart';
 import '../models/comments/comments_model.dart';
 
 class PostProvider extends ChangeNotifier{
@@ -51,6 +49,38 @@ class PostProvider extends ChangeNotifier{
     }
   }
 
+
+
+  Future<List<Post>> getSelfPost(int pageKey) async{
+
+    try{
+      _is_loading = true;
+      notifyListeners();
+
+      final response = await ApiService().getSelfPosts(pageKey);
+      final postModel = PostsModel.fromJson(response);
+
+
+      _is_lastPage = postModel.next == null ? true : false;
+
+
+      notifyListeners();
+
+      return postModel.results!;
+
+
+
+
+
+    }catch(e) {
+      Fluttertoast.showToast(msg: e.toString());
+      throw e.toString();
+
+    }finally{
+      _is_loading = false;
+      notifyListeners();
+    }
+  }
 
 
   Future<List<Comments>> getCommentsPost(int pageKey, int postId) async{

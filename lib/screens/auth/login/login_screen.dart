@@ -1,4 +1,3 @@
-import 'package:familyarbore/main.dart';
 import 'package:familyarbore/provider/auth_provider.dart';
 import 'package:familyarbore/screens/auth/forgot_password/forgot_password.dart';
 import 'package:familyarbore/screens/auth/register/register_screen.dart';
@@ -10,12 +9,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../../generated/assets.dart';
-import '../../home_wrap/home_wrap_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   static String routeName = "/LoginScreen";
@@ -88,12 +85,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
         }
       }else{
-        Fluttertoast.showToast(msg: "Email is not valid");
+        Fluttertoast.showToast(msg: AppLocalizations.of(context)!.emailisnotvalid);
 
       }
 
     }else{
-      Fluttertoast.showToast(msg: "Please enter all fields");
+      Fluttertoast.showToast(msg: AppLocalizations.of(context)!.pleaseEnterAllFields);
 
     }
 
@@ -116,8 +113,8 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
 
-    double _width = MediaQuery.of(context).size.width;
-    double _height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
 
 
 
@@ -138,10 +135,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     SizedBox(
-                      width: _width,
-                      height: _height ,
+                      width: width,
+                      height: height ,
                       child: Padding(
-                        padding: EdgeInsets.fromLTRB(0, _height * 0.18, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, height * 0.18, 0, 0),
                         child: CustomPaint(
                             painter: const MyCustomPainter([2, 3, 2]),
                             child: Padding(
@@ -160,8 +157,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       })
                                     },
                                     child: SizedBox(
-                                      width: _width,
-                                      height: _height * 0.55,
+                                      width: width,
+                                      height: height * 0.55,
                                       child: Card(
                                         color: Colors.white,
                                         child: Padding(
@@ -184,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 
 
-                                              email_field(_height, context),
+                                              email_field(height, context),
 
                                               
                                               const SizedBox(
@@ -192,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               ),
 
 
-                                              password_field(_height, context),
+                                              password_field(height, context),
 
                                               const SizedBox(
                                                 height: 20,
@@ -212,8 +209,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                     loginReq()
                                                   },
                                                   child: Container(
-                                                      width: _width * 0.6,
-                                                      height: _height * 0.067,
+                                                      width: width * 0.6,
+                                                      height: height * 0.067,
                                                       decoration: BoxDecoration(
                                                           gradient: cardColorBlue,
                                                           borderRadius: BorderRadius.circular(15)
@@ -235,7 +232,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                                 AppLocalizations.of(context)!.signIn, // Text displayed on the button
                                                                 style: GoogleFonts.rubik().copyWith(fontSize: 12, fontWeight: FontWeight.w400, color: Colors.white)),
                                                             SizedBox(
-                                                              width: _width * 0.02,
+                                                              width: width * 0.02,
                                                             ),
 
 
@@ -262,7 +259,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               ),
 
 
-                                              btn_register(width: _width, height: _height),
+                                              btn_register(width: width, height: height),
 
 
 
@@ -308,9 +305,9 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  SizedBox password_field(double _height, BuildContext context) {
+  SizedBox password_field(double height, BuildContext context) {
     return SizedBox(
-                                              height: _height * 0.06,
+                                              height: height * 0.06,
                                               child: Focus(
                                                 onFocusChange: (value) {
                                                   setState(() {
@@ -378,9 +375,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                             );
   }
 
-  SizedBox email_field(double _height, BuildContext context) {
+  SizedBox email_field(double height, BuildContext context) {
     return SizedBox(
-                                              height: _height * 0.06,
+                                              height: height * 0.06,
                                               child: Focus(
                                                 onFocusChange: (value) {
                                                   setState(() {

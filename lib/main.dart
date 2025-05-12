@@ -1,9 +1,7 @@
 import 'package:familyarbore/provider/auth_provider.dart';
 import 'package:familyarbore/provider/post_provider.dart';
-import 'package:familyarbore/screens/add_post/add_post_screen.dart';
-import 'package:familyarbore/screens/splash/splash_screen.dart';
+import 'package:familyarbore/screens/requests/requests_screen.dart';
 import 'package:familyarbore/service/sharedPreferences_service.dart';
-import 'package:familyarbore/test_screen.dart';
 import 'package:familyarbore/utils/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -31,6 +29,9 @@ void main() async{
   setupDi();
   await setupDiAsync();
 
+
+
+
   runApp(
      MultiProvider(
          providers: [
@@ -52,12 +53,12 @@ class MyApp extends StatelessWidget {
 
     final appRouterTest = GoRouter(
         debugLogDiagnostics: true,
-        initialLocation: AddPostScreen.routeName, routes: [
+        initialLocation: RequestsScreen.routeName, routes: [
       GoRoute(
-        path: AddPostScreen.routeName,
-        name: AddPostScreen.routeName,
+        path: RequestsScreen.routeName,
+        name: RequestsScreen.routeName,
         builder: (context, state) {
-          return const AddPostScreen();
+          return const RequestsScreen();
         },
       ),
     ]);
@@ -69,9 +70,9 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
 
-      // routerConfig: appRouter(context),
+      routerConfig: appRouter(context),
 
-      routerConfig: appRouterTest,
+      // routerConfig: appRouterTest,
 
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

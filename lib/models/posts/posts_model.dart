@@ -2,6 +2,7 @@
 /// next : null
 /// previous : null
 /// results : [{"id":6,"medias":[{"is_featured":false,"file":"https://api.familyarbore.com/media/posts/media/20250503_005552.jpeg","ext":".jpeg"}],"likes":{"counter":1,"users":[34]},"author":{"relation":"Unknown","member":{"id":20,"avatar":null,"initial_name":"MC","full_name":"Mohammad Chavazi","is_online":true},"family":"Chavazi family","is_active":true},"created_at":"2025-05-03T00:55:52.152141Z","updated_at":"2025-05-03T00:55:52.152193Z","text":"helllo family","is_active":true}]
+library;
 
 class PostsModel {
   PostsModel({
