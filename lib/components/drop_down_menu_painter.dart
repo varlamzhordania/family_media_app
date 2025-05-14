@@ -83,10 +83,7 @@ class _DropdownScrollBehavior extends ScrollBehavior {
   TargetPlatform getPlatform(BuildContext context) =>
       Theme.of(context).platform;
 
-  @override
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) =>
-      child;
+
 
   @override
   ScrollPhysics getScrollPhysics(BuildContext context) =>
@@ -95,10 +92,10 @@ class _DropdownScrollBehavior extends ScrollBehavior {
 
 class _DropdownMenu<T> extends StatefulWidget {
   const _DropdownMenu({
-    Key? key,
+    super.key,
     required this.padding,
     required this.route,
-  }) : super(key: key);
+  });
 
   final _DropdownRoute<T> route;
   final EdgeInsets padding;
@@ -165,7 +162,7 @@ class _DropdownMenuState<T> extends State<_DropdownMenu<T>> {
         child: InkWell(
           onTap: () => Navigator.pop(
             context,
-            _DropdownRouteResult<T>(route.items[itemIndex].value!),
+            _DropdownRouteResult<T>(route.items[itemIndex].value as T),
           ),
           child: Container(
             padding: widget.padding,
@@ -405,7 +402,7 @@ class CustomDropdownButton<T> extends StatefulWidget {
   /// The [elevation] and [iconSize] arguments must not be null (they both have
   /// defaults, so do not need to be specified).
   CustomDropdownButton({
-    Key? key,
+    super.key,
     required this.items,
     this.hint,
     this.onChanged,
@@ -423,8 +420,7 @@ class CustomDropdownButton<T> extends StatefulWidget {
       items
           .where((DropdownMenuItem<T> item) => item.value == value)
           .length ==
-          1),
-        super(key: key);
+          1);
 
   /// The list of possible items to select among.
   final List<DropdownMenuItem<T>> items;
@@ -509,12 +505,12 @@ class _DropdownButtonState<T> extends State<CustomDropdownButton<T>>
     /// Comment line below out if you don't want your dropdown to have an initial
     /// value upon initial build
     _updateSelectedIndex();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance!.removeObserver(this);
+    WidgetsBinding.instance.removeObserver(this);
     _removeDropdownRoute();
     super.dispose();
   }

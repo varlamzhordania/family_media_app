@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'dart:math' as math;
 import '../../components/drop_down_menu_painter.dart';
+import '../../components/header.dart';
 import '../../generated/assets.dart';
 
 class FamilyListScreen extends StatefulWidget {
@@ -54,42 +55,11 @@ class _FamilyListScreenState extends State<FamilyListScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () => {Navigator.pop(context)},
-                  child: Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(100)),
-                    child: Center(
-                      child: SvgPicture.asset(
-                        width: 25,
-                        height: 25,
-                        fit: BoxFit.fill,
-                        color: Colors.black,
-                        Assets.iconsArrowChevronLeft,
-                        semanticsLabel: 'back to Profile',
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: width * 0.27,
-                ),
-                Text(
-                    AppLocalizations.of(context)!
-                        .familyList, // Text displayed on the button
-                    style: GoogleFonts.rubik().copyWith(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: textColor))
-              ],
-            ),
+
+            header(
+                width: width,
+                checked_pop: false,
+                title: AppLocalizations.of(context)!.familyList),
             SingleChildScrollView(
               child: SizedBox(
                   child: ListView(

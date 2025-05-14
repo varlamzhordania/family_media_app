@@ -1,8 +1,8 @@
 import 'dart:io';
-
+import 'package:familyarbore/animationRouter/src/modifiers.dart';
+import 'package:familyarbore/models/friendsRequests/friend_model.dart';
 import 'package:familyarbore/provider/auth_provider.dart';
 import 'package:familyarbore/screens/auth/register/register_password_screen.dart';
-import 'package:familyarbore/screens/createPost/create_post_screen.dart';
 import 'package:familyarbore/screens/get_start/get_start_screen.dart';
 import 'package:familyarbore/screens/home_wrap/home_wrap_screen.dart';
 import 'package:familyarbore/screens/requests/requests_screen.dart';
@@ -11,10 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../animationRouter/src/go_transitions.dart';
 import '../screens/auth/forgot_password/forgot_password.dart';
 import '../screens/auth/login/login_screen.dart';
 import '../screens/auth/register/register_screen.dart';
 import '../screens/familyList/family_list_screen.dart';
+import '../screens/home_post/createPost/create_post_screen.dart';
 import '../screens/profile/edit/edit_profile_screen.dart';
 import '../screens/profile/profile_screen.dart';
 
@@ -22,10 +24,13 @@ GoRouter appRouter(BuildContext context) => GoRouter(
       refreshListenable: Provider.of<AuthProvider>(context, listen: false),
       debugLogDiagnostics: true,
       initialLocation: SplashScreen.routeName,
-      routes: <RouteBase>[
+
+      routes: [
         GoRoute(
+
           path: SplashScreen.routeName,
           name: SplashScreen.routeName,
+          pageBuilder: GoTransitions.fadeUpwards.call,
           builder: (context, state) {
             return const SplashScreen();
           },
@@ -34,6 +39,7 @@ GoRouter appRouter(BuildContext context) => GoRouter(
         GoRoute(
           path: CreatePostScreen.routeName,
           name: CreatePostScreen.routeName,
+          pageBuilder: GoTransitions.zoom.call,
           builder: (context, state) {
             return const CreatePostScreen();
           },
@@ -43,7 +49,7 @@ GoRouter appRouter(BuildContext context) => GoRouter(
           path: RequestsScreen.routeName,
           name: RequestsScreen.routeName,
           builder: (context, state) {
-            return const RequestsScreen();
+            return RequestsScreen(friendList: state.extra as List<FriendModel>?);
           },
         ),
         GoRoute(
@@ -56,6 +62,7 @@ GoRouter appRouter(BuildContext context) => GoRouter(
         GoRoute(
           path: ProfileScreen.routeName,
           name: ProfileScreen.routeName,
+          pageBuilder: GoTransitions.slide.toRight.withFade.call,
           builder: (context, state) {
             return const ProfileScreen();
           },
@@ -63,6 +70,7 @@ GoRouter appRouter(BuildContext context) => GoRouter(
         GoRoute(
           path: EditProfileScreen.routeName,
           name: EditProfileScreen.routeName,
+          pageBuilder: GoTransitions.slide.toTop.withFade.call,
           builder: (context, state) {
             return const EditProfileScreen();
           },
@@ -107,11 +115,13 @@ GoRouter appRouter(BuildContext context) => GoRouter(
         GoRoute(
           path: HomeWrapScreen.routeName,
           name: HomeWrapScreen.routeName,
+          pageBuilder: GoTransitions.fadeUpwards.call,
           builder: (context, state) {
             return const HomeWrapScreen();
           },
         ),
       ],
+
       errorBuilder: (context, state) =>
           ErrorRoute(error: state.error.toString()),
       redirect: (BuildContext context, GoRouterState state) {
@@ -127,7 +137,6 @@ GoRouter appRouter(BuildContext context) => GoRouter(
         final isAuthenticated = appProvider.isAuthenticated;
         final hasSeenGetStarted = appProvider.hasSeenGetStarted;
 
-// Simplify your redirect logic
         if (isAuthenticated) {
           if (state.matchedLocation == (HomeWrapScreen.routeName) ||
               state.matchedLocation == ProfileScreen.routeName ||
@@ -138,21 +147,17 @@ GoRouter appRouter(BuildContext context) => GoRouter(
             return null; // Allow access to these routes when authenticated
           }
 
-// For any other route, redirect to home when authenticated
           return HomeWrapScreen.routeName;
         }
 
-// Handle unauthenticated state
         if (!hasSeenGetStarted) {
           return GetStartScreen.routeName;
         }
 
-// Allow access to login and its sub-routes
         if (state.matchedLocation.startsWith(LoginScreen.routeName)) {
           return null;
         }
 
-// Default redirect to login for unauthenticated users
         return LoginScreen.routeName;
       },
     );

@@ -12,6 +12,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../../../components/header.dart';
+
 class RegisterPasswordScreen extends StatefulWidget {
   static String routeName = "/RegisterPasswordScreen";
   final Map<String, dynamic> requestBody;
@@ -218,45 +220,10 @@ class _RegisterPasswordState extends State<RegisterPasswordScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
 
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          GestureDetector(
-                            onTap: () => {Navigator.pop(context)},
-                            child: Container(
-                              width: 35,
-                              height: 35,
-                              decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(100)),
-                              child: Center(
-                                child: SvgPicture.asset(
-                                  width: 25,
-                                  height: 25,
-                                  fit: BoxFit.fill,
-                                  color: Colors.black54,
-                                  Assets.iconsArrowChevronLeft,
-                                  semanticsLabel: 'back to Login',
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                              width: width * 0.27
-                          ),
-                          Text(
-                              AppLocalizations.of(context)!
-                                  .password, // Text displayed on the button
-                              style: GoogleFonts.rubik().copyWith(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black54))
-                        ],
-                      ),
-                    ),
+                    header(
+                        width: width,
+                        checked_pop: false,
+                        title: AppLocalizations.of(context)!.password),
 
                     SizedBox(
                       width: width,

@@ -1,4 +1,4 @@
-import 'package:familyarbore/screens/home/home_screen.dart';
+import 'package:familyarbore/screens/home_post/home_screen.dart';
 import 'package:familyarbore/screens/message/message_screen.dart';
 import 'package:familyarbore/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +10,13 @@ import '../utils/theme_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-class Bottom_nav extends StatefulWidget {
-  const Bottom_nav({super.key});
+class BottomNav extends StatefulWidget {
+  const BottomNav({super.key});
   @override
   _MybottomnavState createState() => _MybottomnavState();
 }
 
-class _MybottomnavState extends State<Bottom_nav> {
+class _MybottomnavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     PersistentTabController controller;
@@ -29,10 +29,10 @@ class _MybottomnavState extends State<Bottom_nav> {
       controller: controller,
       screenTransitionAnimation: const ScreenTransitionAnimation(
         curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 400),
       ),
 
-      navBarBuilder: (navBarConfig) => Style1BottomNavBar(
+      navBarBuilder: (navBarConfig) => Style2BottomNavBar(
         navBarConfig: navBarConfig,
         navBarDecoration:NavBarDecoration(
             borderRadius: BorderRadius.circular(10.0),
@@ -54,27 +54,30 @@ List<PersistentTabConfig> _tabs(BuildContext context) => [
     screen: const HomeScreen(),
     item: ItemConfig(
       icon: SvgPicture.asset(
-        width: 20,
-        height: 20,
+        width: 23,
+        height: 23,
         Assets.iconsHome,
+        color: greyColor,
         semanticsLabel: 'Home',
       ),
       title: AppLocalizations.of(context)!.home,
-      activeColorSecondary: yellowColor,
+      activeColorSecondary: greyColorLight,
       inactiveForegroundColor: blueColor,
+
     ),
   ),
   PersistentTabConfig(
     screen: const MessageScreen(),
     item: ItemConfig(
       icon: SvgPicture.asset(
-        width: 20,
-        height: 20,
+        width: 23,
+        height: 23,
         Assets.iconsMessages,
         semanticsLabel: 'Messages',
+        color: greyColor,
       ),
       title: AppLocalizations.of(context)!.messages,
-      activeColorSecondary: yellowColor,
+      activeColorSecondary: greyColorLight,
       inactiveForegroundColor: blueColor,
     ),
   ),
@@ -82,13 +85,14 @@ List<PersistentTabConfig> _tabs(BuildContext context) => [
     screen: const ProfileScreen(),
     item: ItemConfig(
       icon: SvgPicture.asset(
-        width: 20,
-        height: 20,
-        Assets.iconsUser,
+        width: 23,
+        height: 23,
+        Assets.iconsProfile,
         semanticsLabel: 'User',
+        color: greyColor,
       ),
       title: AppLocalizations.of(context)!.profile,
-      activeColorSecondary: yellowColor,
+      activeColorSecondary: greyColorLight,
       inactiveForegroundColor: blueColor,
     ),
   ),

@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../../../components/header.dart';
 import '../../../generated/assets.dart';
 class ForgotPassword extends StatefulWidget {
   static String routeName = "/ForgotPassword";
@@ -146,47 +146,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          GestureDetector(
-                            onTap: () => context.pop(),
-                            child: Container(
-                              width: 35,
-                              height: 35,
-                              decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(100)),
-                              child: Center(
-                                child: SvgPicture.asset(
-                                  width: 25,
-                                  height: 25,
-                                  fit: BoxFit.fill,
-                                  color: Colors.black54,
-                                  Assets.iconsArrowChevronLeft,
-                                  semanticsLabel: 'back to Login',
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: width * 0.2
-                          ),
-                          Text(
-                              AppLocalizations.of(context)!
-                                  .forgetPasswordScreenTitle, // Text displayed on the button
-                              style: GoogleFonts.rubik().copyWith(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black54))
-                        ],
-                      ),
-                    ),
-                
+                    header(
+                        width: width,
+                        checked_pop: false,
+                        title: AppLocalizations.of(context)!.forgetPasswordScreenTitle),
+
                     SizedBox(
                       width: width,
                       height: height ,

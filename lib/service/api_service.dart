@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -137,10 +138,37 @@ class ApiService {
     }
   }
 
+  Future<List<dynamic>> getFriendRequests() async{
+    final userToken =  await _getUserToken();
+
+    try{
+      final response = await http.get(
+        Uri.parse('$baseUrl/api/accounts/user/friend-requests/'),
+        headers: <String, String> {
+          'Content-Type': 'application/json; charset=UTF-8',
+          "Authorization": "Bearer $userToken"
+        },
+      );
+
+
+      debugPrint(response.body);
+
+      if(response.statusCode == 200){
+        return jsonDecode(response.body);
+      }else{
+        throw Exception("error from server");
+
+      }
+
+
+    }catch(e){
+      throw Exception(e);
+    }
+  }
 
 
 
-  Future<Map<String, dynamic>> likePost(Map<String, dynamic> requestsBody) async{
+  Future<void> likePost(Map<String, dynamic> requestsBody) async{
     final userToken =  await _getUserToken();
 
 
@@ -159,9 +187,45 @@ class ApiService {
 
       );
 
-      debugPrint(response.body);
+      debugPrint(
+          response.body
+      );
+    }catch(e){
+      throw Exception(e);
+    }
+  }
 
-      return jsonDecode(response.body);
+
+
+  Future<String> friendRequestsAct(Map<String, dynamic> requestsBody, String userID) async{
+    final userToken =  await _getUserToken();
+
+
+    try{
+      final response = await http.post(
+          Uri.parse('$baseUrl/api/accounts/user/friend-request/$userID/'),
+          headers: <String, String> {
+            'Content-Type': 'application/json; charset=UTF-8',
+            "Authorization": "Bearer $userToken"
+          },
+
+
+          body: jsonEncode(requestsBody)
+
+
+
+      );
+
+
+      var decoded = jsonDecode(response.body);
+
+      debugPrint(
+          response.body
+      );
+
+      return decoded["detail"];
+
+
 
     }catch(e){
       throw Exception(e);
@@ -199,6 +263,7 @@ class ApiService {
       if(response.statusCode == 201){
         return;
       }else{
+        debugPrint("Exception create post: $e");
         throw Exception('Failed to create new post');
       }
     }catch(e){

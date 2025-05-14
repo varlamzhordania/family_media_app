@@ -152,4 +152,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get events => 'Events';
+
+  @override
+  String get friendsRequests => 'Friends requests';
 }

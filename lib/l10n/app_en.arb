@@ -48,7 +48,8 @@
   "containsACapitaLetter": "Contains a capital letter",
   "containANumber": "Contains a number",
   "containASpacialCharacter": "Contains spacial character",
-  "events": "Events"
+  "events": "Events",
+  "friendsRequests": "Friends requests"
 
 
 

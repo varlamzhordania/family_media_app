@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../models/comments/comments_model.dart';
+import '../models/friendsRequests/friend_model.dart';
 
 class PostProvider extends ChangeNotifier{
   bool _is_loading = false;
@@ -126,7 +127,6 @@ class PostProvider extends ChangeNotifier{
 
 
     }catch(e) {
-      Fluttertoast.showToast(msg: e.toString());
       throw e.toString();
 
     }finally{
@@ -136,18 +136,17 @@ class PostProvider extends ChangeNotifier{
   }
 
 
+
+
+
+
   Future<void> addCommentsPost(Map<String, dynamic> requestsBody) async{
 
     try{
       _is_loading = true;
       notifyListeners();
 
-      final response = await ApiService().addComments(requestsBody);
-
-
-
-
-
+      await ApiService().addComments(requestsBody);
 
 
     }catch(e) {

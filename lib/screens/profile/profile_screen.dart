@@ -85,6 +85,93 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
 
+  Future<dynamic> buildShowModalBottomSheetHeader(
+      BuildContext context, double height, double width) {
+    return showModalBottomSheet(
+        context: context,
+        useRootNavigator: true,
+        backgroundColor: Colors.transparent,
+        builder: (builder) {
+          return SizedBox(
+              height: height * 0.3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: height * 0.15,
+                    width: width * 0.8,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.white),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              await selectImage(source: ImageSource.gallery);
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                                AppLocalizations.of(context)!.chooseFromGallery,
+                                // Text displayed on the button
+                                style: GoogleFonts.rubik().copyWith(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w300,
+                                    color: Colors.blueAccent)),
+                          ),
+                          GestureDetector(
+                              onTap: () async {
+                                await selectImage(source: ImageSource.camera);
+                                Navigator.pop(context);
+                              },
+                              child: Center(
+                                child: Text(
+                                    AppLocalizations.of(context)!.takeAPhoto,
+                                    // Text displayed on the button
+                                    style: GoogleFonts.rubik().copyWith(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w300,
+                                        color: Colors.blueAccent)),
+                              ))
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: height * 0.08,
+                      width: width * 0.8,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.white),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Center(
+                          child: Text(AppLocalizations.of(context)!.cancel,
+                              // Text displayed on the button
+                              style: GoogleFonts.rubik().copyWith(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                  color: Colors.blueAccent)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ));
+        });
+  }
+
+
   List<String> selectedFamily = [];
 
   final bubbles = [
@@ -220,7 +307,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           GestureDetector(
                             onTap: () async {
-                              buildShowModalBottomSheetHeader(context, height);
+                              buildShowModalBottomSheetHeader(context, height, width);
                             },
                             child: const headerImage(),
                           ),
@@ -782,118 +869,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 });
   }
 
-  Future<dynamic> buildShowModalBottomSheetHeader(BuildContext context, double height) {
-    return showModalBottomSheet(
-                                useRootNavigator: true,
-                                context: context,
-                                builder: (builder) {
-                                  return Container(
-                                    height: height * 0.26,
-                                    color: Colors.transparent,
-                                    //could change this to Color(0xFF737373),
-                                    //so you don't have to change MaterialApp canvasColor
-                                    child: Container(
-                                        decoration: const BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.only(
-                                                topLeft:
-                                                    Radius.circular(10.0),
-                                                topRight:
-                                                    Radius.circular(10.0))),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(12.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                height: height * 0.05,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () async {
-                                                  await selectImage(
-                                                      source: ImageSource
-                                                          .gallery);
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .center,
-                                                  children: [
-                                                    SvgPicture.asset(
-                                                      width: 25,
-                                                      height: 25,
-                                                      fit: BoxFit.fill,
-                                                      color: Colors.black,
-                                                      Assets.iconsGallery,
-                                                      semanticsLabel:
-                                                          'Gallery chosen',
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Text(AppLocalizations.of(context)!.chooseFromGallery,
-                                                        // Text displayed on the button
-                                                        style: GoogleFonts
-                                                                .rubik()
-                                                            .copyWith(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                                color:
-                                                                    textColor))
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 30,
-                                              ),
-                                              GestureDetector(
-                                                onTap: () async {
-                                                  await selectImage(
-                                                      source:
-                                                          ImageSource.camera);
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .center,
-                                                  children: [
-                                                    SvgPicture.asset(
-                                                      width: 25,
-                                                      height: 25,
-                                                      fit: BoxFit.fill,
-                                                      color: Colors.black,
-                                                      Assets.iconsCamera,
-                                                      semanticsLabel:
-                                                          'Camera chosen',
-                                                    ),
-                                                    const SizedBox(
-                                                      width: 10,
-                                                    ),
-                                                    Text(AppLocalizations.of(context)!.takeAPhoto,
-                                                        // Text displayed on the button
-                                                        style: GoogleFonts
-                                                                .rubik()
-                                                            .copyWith(
-                                                                fontSize: 15,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
-                                                                color:
-                                                                    textColor))
-                                                  ],
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        )),
-                                  );
-                                });
-  }
 }
 
 class bioText extends StatelessWidget {
@@ -1156,3 +1131,7 @@ class _ControlsOverlay extends StatelessWidget {
     );
   }
 }
+
+
+
+

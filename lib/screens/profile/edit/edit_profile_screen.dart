@@ -1,12 +1,16 @@
 import 'dart:io';
 
+import 'package:familyarbore/provider/auth_provider.dart';
 import 'package:familyarbore/utils/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
 
+import '../../../components/header.dart';
 import '../../../generated/assets.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -74,42 +78,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () => {
-                        Navigator.pop(context)
-                      },
-                      child: Container(
-                        width: 35,
-                        height: 35,
-                        decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(100)),
-                        child: Center(
-                          child: SvgPicture.asset(
-                            width: 25,
-                            height: 25,
-                            fit: BoxFit.fill,
-                            color: Colors.black,
-                            Assets.iconsArrowChevronLeft,
-                            semanticsLabel: 'back to Profile',
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(
-                        width: width * 0.27,
-                     ),
-
-                    Text(
-                        AppLocalizations.of(context)!.editProfile, // Text displayed on the button
-                        style: GoogleFonts.rubik().copyWith(fontSize: 16, fontWeight: FontWeight.w700, color: textColor))
-                  ],
-                ),
+                header(
+                    width: width,
+                    checked_pop: false,
+                    title: AppLocalizations.of(context)!.editProfile.toString()),
                 SizedBox(
                   height: height * 0.01,
                 ),
@@ -549,41 +521,49 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   height: 20,
                 ),
                 Center(
-                  child: Container(
-                      width: width * 0.6,
-                      height: height * 0.067,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                            color: borderColor,
-                            width: 2,
-                          )),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(AppLocalizations.of(context)!.edit,
-                              // Text displayed on the button
-                              style: GoogleFonts.rubik().copyWith(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: btnColor)),
-                          SizedBox(
-                            width: width * 0.02,
-                          ),
+                  child: InkWell(
+                    onTap: () => {
 
-                          // SvgPicture.asset(
-                          //   width: 15,
-                          //   height: 15,
-                          //   fit: BoxFit.scaleDown,
-                          //   Assets.iconsArrowRight,
-                          //   semanticsLabel: 'login icon',
-                          //   color: btnColor,
-                          //
-                          // ),
-                        ],
-                      )),
+                    },
+                    child: Container(
+                        width: width * 0.8,
+                        height: height * 0.057,
+                        decoration: BoxDecoration(
+                            gradient: cardColorBlue,
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Consumer<AuthProvider>(
+                            builder: (context, data, child) {
+                              debugPrint("loading: ${data.is_loading}");
+                              return data.is_loading
+                                  ? Center(
+                                  child: LoadingAnimationWidget.progressiveDots(
+                                      color: Colors.white, size: 25))
+                                  : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                      AppLocalizations.of(context)!
+                                          .edit, // Text displayed on the button
+                                      style: GoogleFonts.rubik().copyWith(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white)),
+                                  SizedBox(
+                                    width: width * 0.02,
+                                  ),
+                                  SvgPicture.asset(
+                                    width: 15,
+                                    height: 15,
+                                    fit: BoxFit.scaleDown,
+                                    Assets.iconsSend2,
+                                    semanticsLabel: 'login icon',
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              );
+                            })),
+                  ),
                 ),
               ],
             ),

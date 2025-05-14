@@ -1,5 +1,8 @@
 import 'package:familyarbore/provider/auth_provider.dart';
+import 'package:familyarbore/provider/event_provider.dart';
 import 'package:familyarbore/provider/post_provider.dart';
+import 'package:familyarbore/provider/friend_provider.dart';
+import 'package:familyarbore/provider/profile_provider.dart';
 import 'package:familyarbore/screens/requests/requests_screen.dart';
 import 'package:familyarbore/service/sharedPreferences_service.dart';
 import 'package:familyarbore/utils/app_router.dart';
@@ -9,6 +12,9 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'animationRouter/src/go_transition.dart';
+import 'animationRouter/src/go_transitions.dart';
 
 final getIt = GetIt.instance;
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -37,6 +43,9 @@ void main() async{
          providers: [
            ChangeNotifierProvider(create: (_) => AuthProvider()),
            ChangeNotifierProvider(create: (_) => PostProvider()),
+           ChangeNotifierProvider(create: (_) => FriendProvider()),
+           ChangeNotifierProvider(create: (_) => ProfileProvider()),
+           ChangeNotifierProvider(create: (_) => EventProvider())
 
          ],
          child: const MyApp()),
@@ -48,8 +57,14 @@ void main() async{
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
+
+
+    GoTransition.defaultCurve = Curves.easeInOut;
+    GoTransition.defaultDuration = const Duration(milliseconds: 600);
 
     final appRouterTest = GoRouter(
         debugLogDiagnostics: true,
@@ -58,7 +73,7 @@ class MyApp extends StatelessWidget {
         path: RequestsScreen.routeName,
         name: RequestsScreen.routeName,
         builder: (context, state) {
-          return const RequestsScreen();
+          return RequestsScreen();
         },
       ),
     ]);
@@ -84,6 +99,14 @@ class MyApp extends StatelessWidget {
             seedColor: Colors.white,
             brightness: Brightness.light,
           ),
+
+        pageTransitionsTheme: const PageTransitionsTheme(
+          builders: {
+            TargetPlatform.android: GoTransitions.cupertino,
+            TargetPlatform.iOS: GoTransitions.cupertino,
+            TargetPlatform.macOS: GoTransitions.cupertino,
+          },
+        ),
 
 
       ),

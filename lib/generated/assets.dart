@@ -5,6 +5,7 @@ class Assets {
   static const String iconsArrowChevronLeft = 'assets/icons/arrow_chevron_left.svg';
   static const String iconsArrowChevronRight = 'assets/icons/arrow_chevron_right.svg';
   static const String iconsArrowRight = 'assets/icons/arrow_right.svg';
+  static const String iconsCalendar2 = 'assets/icons/calendar_2.svg';
   static const String iconsCamera = 'assets/icons/camera.svg';
   static const String iconsEdit = 'assets/icons/edit.svg';
   static const String iconsEye = 'assets/icons/eye.svg';
@@ -22,7 +23,10 @@ class Assets {
   static const String iconsMessages = 'assets/icons/messages.svg';
   static const String iconsMore = 'assets/icons/more.svg';
   static const String iconsNotificationBing = 'assets/icons/notification_bing.svg';
+  static const String iconsPeople = 'assets/icons/people.svg';
+  static const String iconsProfile = 'assets/icons/profile.svg';
   static const String iconsProfile2user = 'assets/icons/profile_2user.svg';
+  static const String iconsProfileadd = 'assets/icons/profileadd.svg';
   static const String iconsSend2 = 'assets/icons/send_2.svg';
   static const String iconsSmsTracking = 'assets/icons/sms_tracking.svg';
   static const String iconsTrash = 'assets/icons/trash.svg';
@@ -30,6 +34,7 @@ class Assets {
   static const String iconsWarning = 'assets/icons/warning.svg';
   static const String imagesFile = 'assets/images/file.jpeg';
   static const String imagesHeaderProfile = 'assets/images/header_profile.svg';
+  static const String imagesNoFriedn = 'assets/images/noFriedn.svg';
   static const String imagesPROFILE = 'assets/images/PROFILE.svg';
   static const String imagesPROFILETest = 'assets/images/PROFILE_test.png';
   static const String imagesParents = 'assets/images/parents.png';

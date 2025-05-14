@@ -9,7 +9,7 @@ const cardColorBlue = LinearGradient(
     end: Alignment.bottomRight,
     colors: [
   Color(0xFF6C63FF),
-      Color(0xFF5AB2FF),
+      Color(0xFFB09FFF),
       // Color(0xFFe1bee7),
 ]);
 
@@ -35,7 +35,7 @@ const cardColorRed = LinearGradient(
       // Color(0xFFe1bee7),
     ]);
 
-const borderColor = Color(0xFF6C63FF);
+const borderColor = Color(0xFFB09FFF);
 const btnColor = Color(0xFF6C63FF);
 
 
@@ -62,7 +62,10 @@ const greyColorLight = Color.fromARGB(255, 243, 242, 242);
 const errorColor = Color(0xFFef5350);
 const successColor = Color(0xFF66bb6a);
 
-const purpleColor = Color(0xFF7c4dff);
+const purpleColorOne = Color(0xFFB09FFF);
+const purpleColorTwo = Color(0xFF8D79F6);
+
+
 
 
 
@@ -73,3 +76,6 @@ const textColorBody = Color(0xFF3A5570);
 
 const blueColor = Color(0xFF203953);
 const yellowColor = Color(0xFFFFC436);
+
+
+const greyColor = Color(0xFFABB3C0);
